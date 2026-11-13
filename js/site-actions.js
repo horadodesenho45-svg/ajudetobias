@@ -38,13 +38,14 @@
       videoSection.innerHTML = `
         <div class="campaign-video__player">
           <iframe
-            src="https://player.vimeo.com/video/1246487417?app_id=122963"
+            src="https://player.vimeo.com/video/1246487417?app_id=122963&amp;autoplay=1&amp;muted=1&amp;loop=1"
             title="Vídeo da campanha no Vimeo"
             allow="autoplay; fullscreen; picture-in-picture"
             referrerpolicy="strict-origin-when-cross-origin"
             loading="lazy"
           ></iframe>
         </div>
+        <p class="campaign-video__sound-notice">Para ouvir o vídeo, ative o som no player.</p>
       `;
       campaignSummary.after(videoSection);
     }

@@ -50,6 +50,14 @@ figure.campaign-carousel {
   border: 0;
 }
 
+.campaign-video__sound-notice {
+  margin: 10px 0 0;
+  color: #444;
+  font-size: 14px;
+  line-height: 1.4;
+  text-align: center;
+}
+
 .campaign-static-content {
   padding: 8px 0 24px;
 }
