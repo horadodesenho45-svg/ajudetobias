@@ -1,5 +1,6 @@
 const { randomUUID } = require("node:crypto");
 const { validCpf } = require("../js/validacao-contribuicao");
+const { calculateTotal, maxAmount } = require("../js/adicionais-contribuicao");
 
 const trackingKeys = [
   "utm_source", "utm_medium", "utm_campaign", "utm_content", "utm_term", "src", "sck", "fbclid", "gclid",
@@ -34,16 +35,18 @@ module.exports = async function handler(req, res) {
     return respond(res, 400, "Dados da contribuição inválidos.");
   }
 
-  const { customer, contribution, bundle, tracking } = body;
+  const { customer, contribution, additions, tracking } = body;
   if (!customer || typeof customer !== "object" || Array.isArray(customer) ||
       typeof customer.name !== "string" || customer.name.trim().length < 3 || customer.name.trim().length > 150 ||
       typeof customer.email !== "string" || customer.email.length > 254 || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(customer.email) ||
       typeof customer.document !== "string" || !validCpf(customer.document) ||
       typeof customer.phone !== "string" || !/^\d{10,11}$/.test(customer.phone) ||
-      !Number.isSafeInteger(contribution) || contribution <= 0 ||
-      typeof bundle !== "boolean" ||
-      !Number.isSafeInteger(contribution + (bundle && contribution < 10000 ? 590 : 0))) {
+      !Number.isSafeInteger(contribution) || contribution <= 0) {
     return respond(res, 400, "Confira nome, CPF, telefone, e-mail e valor da contribuição.");
+  }
+  const amount = calculateTotal(contribution, additions);
+  if (amount === null || amount > maxAmount) {
+    return respond(res, 400, "Confira os adicionais: o total do Pix deve ser de até R$ 350,00.");
   }
 
   if (tracking !== undefined && (!tracking || typeof tracking !== "object" || Array.isArray(tracking))) {
@@ -62,10 +65,11 @@ module.exports = async function handler(req, res) {
   const apiKey = process.env.PARADISE_API_KEY;
   if (!apiKey) return respond(res, 503, "O pagamento Pix ainda não foi configurado.");
 
-  const amount = contribution + (bundle && contribution < 10000 ? 590 : 0);
   const payload = {
     amount,
-    description: "Contribuição Ajude Tobias",
+    description: additions.length
+      ? `Ajude Tobias: ${additions.join(", ")}`
+      : "Contribuição Ajude Tobias",
     reference: randomUUID(),
     productHash: "prod_bb8e0ec1c581d0ca",
     customer: {

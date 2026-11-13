@@ -15,12 +15,14 @@
   const name = document.getElementById("name");
   const email = document.getElementById("email");
   const amount = document.getElementById("amount");
-  const bundle = document.getElementById("bundleCheck");
+  const additions = document.querySelectorAll('input[name="additions"]');
+  const additionsConfig = window.contributionAdditions;
   const keys = ["utm_source", "utm_medium", "utm_campaign", "utm_content", "utm_term", "src", "sck", "fbclid", "gclid"];
 
   if (!form || !submit || !validation || !status || !result || !resultAmount ||
       !instructions || !code || !qr || !copy || !copyStatus || !cpf || !phone ||
-      !name || !email || !amount || !bundle || !window.contributionValidation) {
+      !name || !email || !amount || !additionsConfig ||
+      additions.length !== Object.keys(additionsConfig.prices).length || !window.contributionValidation) {
     console.error("Não foi possível inicializar o pagamento Pix.");
     return;
   }
@@ -52,7 +54,6 @@
   }
   form.addEventListener("input", invalidateResult);
   form.addEventListener("input", updateSubmitState);
-  bundle.addEventListener("change", invalidateResult);
   form.addEventListener("reset", () => setTimeout(updateSubmitState, 0));
 
   form.addEventListener("submit", async (event) => {
@@ -75,7 +76,7 @@
         phone: phone.value.replace(/\D/g, ""),
       },
       contribution,
-      bundle: bundle.checked,
+      additions: Array.from(additions).filter((input) => input.checked).map((input) => input.value),
       tracking,
     };
 
@@ -97,7 +98,7 @@
         status.textContent = body.error || "Não foi possível gerar o Pix. Verifique no painel antes de tentar novamente.";
         return;
       }
-      const expectedAmount = contribution + (data.bundle && contribution < 10000 ? 590 : 0);
+      const expectedAmount = additionsConfig.calculateTotal(contribution, data.additions);
       if (typeof body.code !== "string" || !body.code || body.amount !== expectedAmount) {
         status.textContent = "Resposta Pix inválida. Verifique no painel antes de tentar novamente.";
         return;

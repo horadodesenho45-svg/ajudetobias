@@ -241,6 +241,7 @@
       href="css/f8fe3bf670ff108f.css"
       data-n-g=""
     /><link rel="stylesheet" href="css/valores-contribuicao.css" /><noscript data-n-css=""></noscript
+    ><script src="js/adicionais-contribuicao.js" defer=""></script
     ><script src="js/valores-contribuicao.js" defer=""></script
     ><script src="js/mascaras-contribuicao.js" defer=""></script
     ><script src="js/validacao-contribuicao.js" defer=""></script
@@ -860,7 +861,7 @@
                       class="sc-kpDqfm icrzcy sc-kpDqfm icrzcy"
                       value="" /></div
                   ><div id="amount-help" class="amount-help"
-                    >Informe um valor maior que zero, com até duas casas decimais. Sujeito aos limites da Paradise.</div
+                    >Informe um valor maior que zero. O total do Pix, incluindo adicionais, pode ser de até R$ 350,00.</div
                   ><div class="amount-options" role="group" aria-label="Valores sugeridos"
                     ><button type="button" data-amount="10,00" aria-pressed="false">R$ 10</button
                     ><button type="button" data-amount="20,00" aria-pressed="false">R$ 20</button
@@ -881,45 +882,24 @@
                     ><div></div>Pix</button
                   ></div
                 ></div
-              ><div class="sc-dhKdcB gVCQTT"
-                ><div class="sc-gEvEer eWGeoZ"
-                  ><div class="sc-eqUAAy ndhfJ"
-                    ><div class="sc-dhKdcB hCpJZL"
-                      ><div class="sc-5b46ebe3-0 jakXwb"
-                          ><div class="sc-dhKdcB ijHruT"
-                            ><div class="sc-dhKdcB kUfair"
-                              ><label class="sc-jEACwC cbKyBB"
-                                ><div class="sc-dAlyuH cFya-dV"
-                                  ><input
-                                    id="bundleCheck"
-                                    type="checkbox"
-                                    name="bundleChecked"
-                                    class="sc-jlZhew jkEoQh" /><div
-                                    class="sc-cwHptR iJfhfN"
-                                  ></div></div
-                                ><div class="sc-dhKdcB dFsaZv"
-                                  ><div
-                                    class="sc-fqkvVR lbjYiJ sc-cPiKLX gcLalL"
-                                    >TURBINE SUA DOAÇÃO</div
-                                  ></div
-                                ></label
-                              ></div
-                            ><div id="bundle-price" class="sc-fqkvVR bfxwfh"
-                              >R$ 5,90 abaixo de R$ 100</div
-                            ></div
-                          ><div id="bundle-price-help" class="amount-help"
-                            >Ao selecionar, são adicionados R$ 5,90 para contribuições abaixo de R$ 100,00. A partir de R$ 100,00, não há acréscimo.</div
-                          ></div
-                      ></div
-                    ></div
-                  ></div
+              ><fieldset id="contribution-additions" class="contribution-additions" hidden
+                ><legend>Turbine sua doação</legend
+                ><p>O total por Contribuição não pode ultrapassar R$ 350,00, se deseja contribuir mais, contribua novamente após completar a contribuição atual.</p
+                ><div class="addition-options"
+                  ><label class="addition-option" data-addition-option="coracoes5"><input type="checkbox" name="additions" value="coracoes5"><span><strong>+ R$ 5,90</strong><span>5 corações para destacar a campanha de Tobias</span></span></label
+                  ><label class="addition-option" data-addition-option="coracoes10"><input type="checkbox" name="additions" value="coracoes10"><span><strong>+ R$ 10,50</strong><span>10 corações para destacar a campanha de Tobias</span></span></label
+                  ><label class="addition-option" data-addition-option="oxigenio20"><input type="checkbox" name="additions" value="oxigenio20"><span><strong>+ R$ 20,90</strong><span>20 minutos de oxigênio para Tobias, com aluguel do equipamento</span></span></label
+                  ><label class="addition-option" data-addition-option="fraldas"><input type="checkbox" name="additions" value="fraldas"><span><strong>+ R$ 31,90</strong><span>Fraldas para Tobias</span></span></label
+                  ><label class="addition-option" data-addition-option="oxigenio50"><input type="checkbox" name="additions" value="oxigenio50"><span><strong>+ R$ 40,90</strong><span>50 minutos de oxigênio para Tobias, com aluguel do equipamento</span></span></label
                 ></div
+                ><p id="additions-limit" class="amount-help" aria-live="polite"></p
+              ></fieldset
               ><div class="sc-gEvEer eWGeoZ"
                 ><div class="sc-eqUAAy ndhfJ"
                   ><div class="sc-dhKdcB iGWHkz"></div></div></div
               ><div class="sc-dhKdcB SsWEE"
                 ><div id="contribution-total" class="sc-fqkvVR bZkEdm">Contribuição: R$ 0,00</div
-                ><div id="bundle-total" class="sc-fqkvVR bZkEdm" hidden>Turbine: R$ 0,00</div
+                ><div id="additions-total" class="sc-fqkvVR bZkEdm" hidden>Adicionais: R$ 0,00</div
                 ><div class="sc-jXbUNg eBVHbP"></div
                 ><div id="payment-total" class="sc-fqkvVR bZkEdm">Total: R$ 0,00</div></div
               ><div class="sc-gEvEer eWGeoZ"

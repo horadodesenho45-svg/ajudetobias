@@ -1,6 +1,7 @@
 const test = require("node:test");
 const assert = require("node:assert/strict");
 const handler = require("../api/pix");
+const { calculateTotal } = require("../js/adicionais-contribuicao");
 
 const valid = {
   customer: {
@@ -10,7 +11,7 @@ const valid = {
     phone: "11999999999",
   },
   contribution: 1000,
-  bundle: false,
+  additions: [],
   tracking: {
     utm_source: "teste",
     utm_medium: "cpc",
@@ -23,6 +24,18 @@ const valid = {
     gclid: "clique-google-exemplo",
   },
 };
+
+test("cada adicional tem o valor correto em centavos", () => {
+  for (const [id, price] of Object.entries({
+    coracoes5: 590,
+    coracoes10: 1050,
+    oxigenio20: 2090,
+    fraldas: 3190,
+    oxigenio50: 4090,
+  })) {
+    assert.equal(calculateTotal(1000, [id]), 1000 + price);
+  }
+});
 
 async function request(body, options = {}) {
   const res = {
@@ -56,15 +69,16 @@ test("integração Pix usa centavos, adicional explícito e UTMs", async () => {
   };
   try {
     const plain = await request(valid);
-    const extra = await request({ ...valid, contribution: 1000, bundle: true });
-    const over100 = await request({ ...valid, contribution: 10000, bundle: true });
-    const custom = await request({ ...valid, contribution: 50123, bundle: false });
-    assert.deepEqual([plain.body.amount, extra.body.amount, over100.body.amount, custom.body.amount], [1000, 1590, 10000, 50123]);
+    const extra = await request({ ...valid, contribution: 1000, additions: ["coracoes5", "fraldas"] });
+    const over100 = await request({ ...valid, contribution: 10000, additions: ["coracoes5"] });
+    const boundary = await request({ ...valid, contribution: 34410, additions: ["coracoes5"] });
+    assert.deepEqual([plain.body.amount, extra.body.amount, over100.body.amount, boundary.body.amount], [1000, 4780, 10590, 35000]);
     assert.equal(plain.statusCode, 200);
     assert.equal(plain.body.code, "pix-exemplo");
     assert.equal(sent[0].options.headers["X-API-Key"], "test-key");
     assert.deepEqual(sent[0].body.tracking, valid.tracking);
     assert.equal(sent[0].body.productHash, "prod_bb8e0ec1c581d0ca");
+    assert.equal(sent[1].body.description, "Ajude Tobias: coracoes5, fraldas");
     assert.equal(sent[0].body.source, undefined);
     assert.notEqual(sent[0].body.reference, sent[1].body.reference);
     assert.equal(JSON.stringify(plain.body).includes("test-key"), false);
@@ -103,9 +117,32 @@ test("rejeita dados inválidos, origem externa e configuração ausente", async 
   assert.equal((await request(valid, { contentType: "text/plain" })).statusCode, 415);
   assert.equal((await request({ ...valid, customer: { ...valid.customer, document: "11111111111" } })).statusCode, 400);
   assert.equal((await request({ ...valid, contribution: 0 })).statusCode, 400);
-  assert.equal((await request({ ...valid, bundle: "true" })).statusCode, 400);
+  assert.equal((await request({ ...valid, additions: "coracoes5" })).statusCode, 400);
+  assert.equal((await request({ ...valid, additions: ["coracoes5", "coracoes5"] })).statusCode, 400);
+  assert.equal((await request({ ...valid, additions: ["outro"] })).statusCode, 400);
+  assert.equal((await request({ ...valid, contribution: 35001 })).statusCode, 400);
+  assert.equal((await request({ ...valid, contribution: 34411, additions: ["coracoes5"] })).statusCode, 400);
   assert.equal((await request({ ...valid, tracking: { utm_source: "x".repeat(501) } })).statusCode, 400);
   assert.equal((await request(valid)).statusCode, 503);
+});
+
+test("calcula todos os adicionais e impede que valores sejam fornecidos pelo cliente", async () => {
+  process.env.PARADISE_API_KEY = "test-key";
+  const originalFetch = global.fetch;
+  let sent;
+  global.fetch = async (url, options) => {
+    sent = JSON.parse(options.body);
+    return { ok: true, json: async () => ({ status: "success", qr_code: "pix", amount: sent.amount }) };
+  };
+  try {
+    const response = await request({ ...valid, contribution: 1, additions: ["coracoes5", "coracoes10", "oxigenio20", "fraldas", "oxigenio50"], amount: 1 });
+    assert.equal(response.statusCode, 200);
+    assert.equal(sent.amount, 11011);
+    assert.match(sent.description, /oxigenio20/);
+  } finally {
+    global.fetch = originalFetch;
+    delete process.env.PARADISE_API_KEY;
+  }
 });
 
 test("não apresenta erro do gateway nem resultado inconsistente como sucesso", async () => {

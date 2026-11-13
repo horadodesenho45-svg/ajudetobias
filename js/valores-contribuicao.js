@@ -2,9 +2,11 @@
   const amount = document.getElementById("amount");
   const error = document.getElementById("amount-error");
   const buttons = document.querySelectorAll(".amount-options button");
-  const bundle = document.getElementById("bundleCheck");
-  const bundlePrice = document.getElementById("bundle-price");
-  const bundleTotal = document.getElementById("bundle-total");
+  const additionsSection = document.getElementById("contribution-additions");
+  const additions = document.querySelectorAll('input[name="additions"]');
+  const additionsLimit = document.getElementById("additions-limit");
+  const additionsTotal = document.getElementById("additions-total");
+  const config = window.contributionAdditions;
   const contributionTotal = document.getElementById("contribution-total");
   const paymentTotal = document.getElementById("payment-total");
   const form = amount && amount.form;
@@ -13,9 +15,11 @@
     !amount ||
     !error ||
     !form ||
-    !bundle ||
-    !bundlePrice ||
-    !bundleTotal ||
+    !additionsSection ||
+    !additionsLimit ||
+    !additionsTotal ||
+    !config ||
+    additions.length !== Object.keys(config.prices).length ||
     !contributionTotal ||
     !paymentTotal
   ) {
@@ -34,35 +38,45 @@
     const cents = match
       ? Number(match[1]) * 100 + Number((match[2] || "").padEnd(2, "0"))
       : NaN;
-    const valid = Number.isSafeInteger(cents) && cents > 0 &&
-      Number.isSafeInteger(cents + 590);
+    const validBase = Number.isSafeInteger(cents) && cents > 0;
+    const selected = Array.from(additions).filter((input) => input.checked).map((input) => input.value);
+    const total = validBase ? config.calculateTotal(cents, selected) : null;
+    const valid = total !== null && total <= config.maxAmount;
     const value = cents / 100;
     const message = valid
       ? ""
-      : "Informe um valor maior que zero, com até duas casas decimais.";
+      : validBase && total !== null
+        ? "O total do Pix não pode ultrapassar R$ 350,00. Reduza o valor ou remova adicionais."
+        : "Informe um valor maior que zero, com até duas casas decimais.";
 
     amount.setCustomValidity(message);
     error.textContent = text || showEmptyError ? message : "";
     amount.setAttribute("aria-invalid", error.textContent ? "true" : "false");
-    const formattedValue = valid
+    const formattedValue = validBase
       ? currency.format(value)
       : text
         ? "—"
         : currency.format(0);
     contributionTotal.textContent = `Contribuição: ${formattedValue}`;
-    const fee = valid && value < 100 ? 5.9 : 0;
-    bundlePrice.textContent = valid
-      ? fee
-        ? `+ ${currency.format(fee)}`
-        : "Sem acréscimo"
-      : "R$ 5,90 abaixo de R$ 100";
-    bundleTotal.hidden = !valid || !bundle.checked;
-    bundleTotal.textContent = `Turbine: ${currency.format(fee)}`;
-    paymentTotal.textContent = `Total: ${
-      valid && bundle.checked
-        ? currency.format((cents + (fee ? 590 : 0)) / 100)
-        : formattedValue
-    }`;
+    additionsSection.hidden = !validBase;
+    let available = 0;
+    additions.forEach((input) => {
+      const option = input.closest("[data-addition-option]");
+      const visible = validBase && (input.checked ||
+        (total !== null && total + config.prices[input.value] <= config.maxAmount));
+      option.hidden = !visible;
+      if (visible && !input.checked) available++;
+    });
+    additionsLimit.textContent = validBase && total === config.maxAmount
+      ? "Essa é uma bênção enorme na vida de Tobias. Deus te dará em dobro!"
+      : validBase && total > config.maxAmount
+      ? "O total ultrapassa R$ 350,00. Remova algum adicional ou reduza o valor."
+      : validBase && !available && selected.length === 0
+        ? "Nenhum adicional cabe no limite de R$ 350,00 para este valor."
+        : "";
+    additionsTotal.hidden = !validBase || selected.length === 0;
+    additionsTotal.textContent = `Adicionais: ${currency.format((total - cents) / 100)}`;
+    paymentTotal.textContent = `Total: ${total !== null ? currency.format(total / 100) : formattedValue}`;
     buttons.forEach((button) => {
       button.setAttribute(
         "aria-pressed",
@@ -73,7 +87,7 @@
     });
   }
 
-  bundle.addEventListener("change", () => validate(false));
+  additions.forEach((input) => input.addEventListener("input", () => validate(false)));
 
   buttons.forEach((button) => {
     button.addEventListener("click", () => {
@@ -84,7 +98,7 @@
   amount.addEventListener("input", () => validate(false));
   amount.addEventListener("blur", () => {
     const match = /^(\d+)(?:[,.](\d{1,2}))?$/.exec(amount.value.trim());
-    if (match && amount.validity.valid) {
+    if (match) {
       amount.value = `${match[1]},${(match[2] || "").padEnd(2, "0")}`;
     }
     validate(true);
