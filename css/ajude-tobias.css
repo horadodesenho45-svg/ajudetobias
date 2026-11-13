@@ -1,0 +1,57 @@
+.back-to-campaign {
+  display: block;
+  width: 100%;
+  padding: 14px 20px;
+  border: 0;
+  border-radius: 8px;
+  background-color: #24ca68;
+  color: #fff;
+  font-family: inherit;
+  font-size: 16px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.back-to-campaign:hover {
+  background-color: #009d4e;
+}
+
+.back-to-campaign:focus-visible {
+  outline: 3px solid #005c36;
+  outline-offset: 3px;
+}
+
+figure.campaign-carousel {
+  padding-bottom: 75%;
+}
+
+.campaign-video {
+  width: 100%;
+  max-width: 420px;
+  margin: 24px auto;
+  padding: 0 16px;
+  box-sizing: border-box;
+}
+
+.campaign-video__player {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 9 / 16;
+  overflow: hidden;
+  border-radius: 8px;
+  background-color: #000;
+}
+
+.campaign-video__player iframe {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
+
+@media (max-width: 767px) {
+  figure.campaign-carousel {
+    padding-bottom: 70%;
+  }
+}
