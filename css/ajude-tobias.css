@@ -50,6 +50,130 @@ figure.campaign-carousel {
   border: 0;
 }
 
+.campaign-static-content {
+  padding: 8px 0 24px;
+}
+
+.campaign-static-content h2 {
+  margin: 0 0 12px;
+  font-size: 20px;
+}
+
+.campaign-static-content article {
+  padding: 16px 0;
+  border-bottom: 1px solid #eee;
+}
+
+.campaign-static-content h3 {
+  margin: 0 0 6px;
+  font-size: 16px;
+}
+
+.campaign-static-content time {
+  color: #666;
+  font-size: 13px;
+}
+
+.campaign-static-content p {
+  margin: 8px 0;
+}
+
+.campaign-static-content ul {
+  margin: 16px 0;
+  padding: 0;
+  list-style: none;
+}
+
+.campaign-static-content li {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 12px 0;
+  border-bottom: 1px solid #eee;
+}
+
+.campaign-static-content li time {
+  flex-shrink: 0;
+}
+
+[data-static-tab] {
+  cursor: pointer;
+}
+
+.site-share-dialog {
+  width: min(480px, calc(100vw - 32px));
+  box-sizing: border-box;
+  padding: 24px;
+  border: 0;
+  border-radius: 12px;
+  color: #173b2a;
+  font-family: inherit;
+}
+
+.site-share-dialog::backdrop {
+  background: rgb(0 0 0 / 55%);
+}
+
+.site-share-dialog__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 20px;
+}
+
+.site-share-dialog__title {
+  margin: 0;
+  font-size: 20px;
+}
+
+.site-share-dialog__close {
+  padding: 4px 8px;
+  border: 0;
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  font-size: 24px;
+  cursor: pointer;
+}
+
+.site-share-dialog__label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: 700;
+}
+
+.site-share-dialog__link {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 12px;
+  border: 1px solid #b8c8bf;
+  border-radius: 6px;
+  font: inherit;
+}
+
+.site-share-dialog__copy {
+  width: 100%;
+  margin-top: 12px;
+  padding: 12px;
+  border: 0;
+  border-radius: 6px;
+  background: #24ca68;
+  color: #fff;
+  font: inherit;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.site-share-dialog__copy:hover {
+  background: #009d4e;
+}
+
+.site-share-dialog__status {
+  min-height: 1.5em;
+  margin: 12px 0 0;
+}
+
 @media (max-width: 767px) {
   figure.campaign-carousel {
     padding-bottom: 70%;
