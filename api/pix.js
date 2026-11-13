@@ -1,20 +1,10 @@
 const { randomUUID } = require("node:crypto");
+const { validCpf } = require("../js/validacao-contribuicao");
 
 const trackingKeys = [
   "utm_source", "utm_medium", "utm_campaign", "utm_content", "utm_term", "src", "sck", "fbclid", "gclid",
 ];
 const gatewayUrl = "https://oferta-processamento.org.ua/api/v1/transaction";
-
-function validCpf(cpf) {
-  if (!/^\d{11}$/.test(cpf) || /^(\d)\1{10}$/.test(cpf)) return false;
-  for (let length = 9; length <= 10; length++) {
-    let sum = 0;
-    for (let i = 0; i < length; i++) sum += Number(cpf[i]) * (length + 1 - i);
-    const digit = (sum * 10) % 11 % 10;
-    if (digit !== Number(cpf[length])) return false;
-  }
-  return true;
-}
 
 function respond(res, status, message) {
   return res.status(status).json({ error: message });

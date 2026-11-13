@@ -243,6 +243,7 @@
     /><link rel="stylesheet" href="css/valores-contribuicao.css" /><noscript data-n-css=""></noscript
     ><script src="js/valores-contribuicao.js" defer=""></script
     ><script src="js/mascaras-contribuicao.js" defer=""></script
+    ><script src="js/validacao-contribuicao.js" defer=""></script
     ><script src="js/pix-contribuicao.js" defer=""></script
     ><style id="__jsx-1632331453">
       html {
@@ -925,15 +926,16 @@
                 ><div class="sc-eqUAAy khhZFc"
                   ><div class="sc-dhKdcB iGWHkz"
                     ><button type="submit" id="pix-submit" class="sc-fPXMVe gDEGwv" disabled
-                      >Gerar Pix</button
+                      >Contribuir</button
                     ></div
                   ></div
                 ></div
+              ><div id="pix-validation" class="amount-help" aria-live="polite">Preencha todos os dados obrigatórios para contribuir.</div
               ><div id="pix-status" class="pix-status" role="status" aria-live="polite"></div
               ><section id="pix-result" class="pix-result" hidden aria-labelledby="pix-title"
                 ><h2 id="pix-title">Pague com Pix</h2
                 ><p id="pix-result-amount"></p
-                ><p>Escaneie o QR Code ou copie o código abaixo no aplicativo do seu banco. A geração do código não confirma o pagamento.</p
+                ><p id="pix-instructions">Escaneie o QR Code ou copie o código abaixo no aplicativo do seu banco. A geração do código não confirma o pagamento.</p
                 ><img id="pix-qr" alt="QR Code Pix" hidden
                 /><label for="pix-code">Pix copia e cola</label
                 ><textarea id="pix-code" readonly rows="4"></textarea

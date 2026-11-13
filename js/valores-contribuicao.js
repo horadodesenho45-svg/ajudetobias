@@ -82,7 +82,13 @@
     });
   });
   amount.addEventListener("input", () => validate(false));
-  amount.addEventListener("blur", () => validate(true));
+  amount.addEventListener("blur", () => {
+    const match = /^(\d+)(?:[,.](\d{1,2}))?$/.exec(amount.value.trim());
+    if (match && amount.validity.valid) {
+      amount.value = `${match[1]},${(match[2] || "").padEnd(2, "0")}`;
+    }
+    validate(true);
+  });
   form.addEventListener("reset", () =>
     setTimeout(() => {
       validate(false);

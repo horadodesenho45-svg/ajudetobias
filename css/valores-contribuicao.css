@@ -106,3 +106,21 @@
   font-weight: bold;
   padding: 10px 16px;
 }
+
+#pix-submit {
+  background: #009d4e;
+  border: 0;
+  color: #fff;
+  cursor: pointer;
+  width: 100%;
+}
+
+#pix-submit:disabled {
+  background: #ddd;
+  cursor: not-allowed;
+}
+
+#pix-submit:focus-visible {
+  outline: 3px solid #005c36;
+  outline-offset: 2px;
+}
