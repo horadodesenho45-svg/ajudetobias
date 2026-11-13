@@ -33,6 +33,14 @@ figure.campaign-carousel {
   box-sizing: border-box;
 }
 
+.campaign-video__help {
+  margin-bottom: 16px;
+}
+
+.sc-84a1bdb1-1 {
+  scroll-margin-top: 20px;
+}
+
 .campaign-video__player {
   position: relative;
   width: 100%;

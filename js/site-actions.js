@@ -1,14 +1,52 @@
 (function () {
   let campaignTabContent;
-  let originalCampaignTabContent = "";
+  const relativeTime = new Intl.RelativeTimeFormat("pt-BR", {
+    numeric: "always",
+  });
+
+  function updateSupporterTimes() {
+    if (!campaignTabContent) {
+      return;
+    }
+
+    campaignTabContent.querySelectorAll("time[data-relative-time]").forEach(
+      function (time) {
+        const timestamp = Date.parse(time.dateTime);
+        if (Number.isNaN(timestamp)) {
+          time.textContent = "Horário indisponível";
+          console.error("Horário de apoio inválido:", time.dateTime);
+          return;
+        }
+
+        const difference = timestamp - Date.now();
+        const elapsed = Math.abs(difference);
+        const direction = difference < 0 ? -1 : 1;
+        if (elapsed < 60000) {
+          time.textContent = "agora mesmo";
+        } else if (elapsed < 3600000) {
+          time.textContent = relativeTime.format(
+            direction * Math.floor(elapsed / 60000),
+            "minute"
+          );
+        } else if (elapsed < 86400000) {
+          time.textContent = relativeTime.format(
+            direction * Math.floor(elapsed / 3600000),
+            "hour"
+          );
+        } else {
+          time.textContent = relativeTime.format(
+            direction * Math.floor(elapsed / 86400000),
+            "day"
+          );
+        }
+      }
+    );
+  }
 
   function initializeStaticCampaignContent() {
     const content = document.querySelector(".sc-77c3c68b-0");
     if (content) {
       content.id = "campaign-tab-content";
-      if (!content.querySelector(".campaign-static-content")) {
-        originalCampaignTabContent = content.innerHTML;
-      }
       campaignTabContent = content;
     }
 
@@ -20,6 +58,9 @@
           Sobre: "about",
           Atualizações: "updates",
           "Quem ajudou": "supporters",
+          "Vakinha Premiada": "prizes",
+          "Selos recebidos": "badges",
+          "Perguntas e Respostas": "faq",
         }[label];
 
         if (tabName) {
@@ -36,9 +77,10 @@
       videoSection.className = "campaign-video";
       videoSection.setAttribute("aria-label", "Vídeo da campanha");
       videoSection.innerHTML = `
+        <button type="button" class="back-to-campaign campaign-video__help">Ajude Tobias!</button>
         <div class="campaign-video__player">
           <iframe
-            src="https://player.vimeo.com/video/1246487417?app_id=122963&amp;autoplay=1&amp;muted=1&amp;loop=1"
+            src="https://player.vimeo.com/video/1246487417?app_id=122963&amp;autoplay=1&amp;muted=1&amp;loop=1&amp;title=0&amp;byline=0&amp;portrait=0"
             title="Vídeo da campanha no Vimeo"
             allow="autoplay; fullscreen; picture-in-picture"
             referrerpolicy="strict-origin-when-cross-origin"
@@ -137,12 +179,33 @@
         return;
       }
 
+      const helpButton = event.target.closest(".campaign-video__help");
+      if (helpButton) {
+        event.preventDefault();
+        event.stopImmediatePropagation();
+        const goal = document.querySelector(".sc-84a1bdb1-1");
+        if (goal) {
+          goal.scrollIntoView({ behavior: "smooth", block: "start" });
+        } else {
+          console.error("Não foi possível encontrar a área da meta.");
+        }
+        return;
+      }
+
       const staticTab = event.target.closest("[data-static-tab]");
       if (staticTab && campaignTabContent) {
         event.preventDefault();
         event.stopImmediatePropagation();
 
         const selectedTab = staticTab.dataset.staticTab;
+        const template = document.getElementById(
+          `static-${selectedTab}-content`
+        );
+        if (!(template instanceof HTMLTemplateElement)) {
+          console.error(`Não foi encontrado o conteúdo da aba: ${selectedTab}`);
+          return;
+        }
+
         Array.from(document.querySelectorAll("[data-static-tab]")).forEach(
           function (tab) {
             const isActive = tab === staticTab;
@@ -157,15 +220,9 @@
           }
         );
 
-        if (selectedTab === "about") {
-          campaignTabContent.innerHTML = originalCampaignTabContent;
-        } else {
-          const template = document.getElementById(
-            `static-${selectedTab}-content`
-          );
-          if (template instanceof HTMLTemplateElement) {
-            campaignTabContent.replaceChildren(template.content.cloneNode(true));
-          }
+        campaignTabContent.replaceChildren(template.content.cloneNode(true));
+        if (selectedTab === "supporters") {
+          updateSupporterTimes();
         }
         return;
       }
@@ -199,4 +256,5 @@
     },
     true
   );
+  window.setInterval(updateSupporterTimes, 60000);
 })();

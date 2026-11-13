@@ -1513,9 +1513,7 @@
             U = () =>
               "Vakinha" === a
                 ? (() => {
-                    let e = ""
-                        .concat("https://www.vakinha.com.br", "/vaquinha/")
-                        .concat(v),
+                    let e = window.location.href.split(/[?#]/)[0],
                       t = T();
                     return "".concat(e).concat(t);
                   })()

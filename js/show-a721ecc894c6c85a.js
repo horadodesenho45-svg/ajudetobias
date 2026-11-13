@@ -6069,22 +6069,12 @@
             title: "Como ajudar ".concat(e.user.name, "?"),
             content: (0, O.Ay)(
               [
-                'Fazendo uma doa\xe7\xe3o diretamente pelo <a href="'
-                  .concat("https://www.vakinha.com.br", "/vaquinha/")
-                  .concat(
-                    e.slug,
-                    '/contribua" target="_blank">Vakinha.com.br</a>.',
-                  ),
-                'Compartilhando a vaquinha nas suas <a href="'
-                  .concat("https://www.vakinha.com.br", "/vaquinha/")
-                  .concat(e.slug, '?openModal=true">redes sociais</a>.'),
+                'Fazendo uma doa\xe7\xe3o na <a href="queroajudar.html">p\xe1gina de ajuda</a>.',
+                "Compartilhando a campanha nas suas redes sociais.",
                 "Divulgando para amigos e familiares que possam se sensibilizar com a causa.",
                 ...(e.pixKey
                   ? [
-                      'Doando via PIX <a href="'
-                        .concat("https://www.vakinha.com.br", "/vaquinha/")
-                        .concat(e.slug, '?sharePixKey=true">')
-                        .concat(e.pixKey, ".</a>"),
+                      "Doando via PIX: ".concat(e.pixKey, "."),
                     ]
                   : []),
               ].join("<br>"),
@@ -6106,10 +6096,7 @@
               [
                 ...(e.pixKey
                   ? [
-                      'Chave PIX: <a href="'
-                        .concat("https://www.vakinha.com.br", "/vaquinha/")
-                        .concat(e.slug, '?sharePixKey=true">')
-                        .concat(e.pixKey, ".</a>"),
+                      "Chave PIX: ".concat(e.pixKey, "."),
                     ]
                   : []),
                 "Tipo de chave: E-mail.",
@@ -6376,9 +6363,7 @@
                       (0, ef.t)(ec, "doa\xe7\xe3o"),
                       ". Ajude voc\xea tamb\xe9m!",
                     ),
-            eQ = ""
-              .concat("https://www.vakinha.com.br", "/vaquinha/")
-              .concat(F),
+            eQ = window.location.href.split(/[?#]/)[0],
             eY = (null == e_ ? void 0 : e_.imageUrl) ? e_ : null,
             eX =
               (null == eY ? void 0 : eY.imageUrl) ||
