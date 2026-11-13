@@ -244,9 +244,14 @@
       event.stopImmediatePropagation();
 
       if (label === "Quero Ajudar") {
-        window.location.assign(
-          new URL("queroajudar.html", window.location.href).href
-        );
+        const destination = new URL("queroajudar.html", window.location.href);
+        const current = new URL(window.location.href);
+        ["utm_source", "utm_medium", "utm_campaign", "utm_content", "utm_term", "src", "sck", "fbclid", "gclid"]
+          .forEach(function (key) {
+            const value = current.searchParams.get(key);
+            if (value) destination.searchParams.set(key, value);
+          });
+        window.location.assign(destination.href);
         return;
       }
 

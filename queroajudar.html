@@ -241,32 +241,9 @@
       href="css/f8fe3bf670ff108f.css"
       data-n-g=""
     /><link rel="stylesheet" href="css/valores-contribuicao.css" /><noscript data-n-css=""></noscript
-    ><script
-      defer=""
-      nomodule=""
-      src="js/polyfills-42372ed130431b0a.js"
-    ></script
-    ><script src="js/webpack-25f7c8dccae8e93f.js" defer=""></script
-    ><script src="js/framework-6c17f08e07d1abc4.js" defer=""></script
-    ><script src="js/main-0e896a48a7fa19c2.js" defer=""></script
-    ><script src="js/_app-cde36d8cf7eebf70.js" defer=""></script
-    ><script src="js/ab3c1ce5-8ce41a6821237a0f.js" defer=""></script
-    ><script src="js/4928-bfbe2daeadc5a2aa.js" defer=""></script
-    ><script src="js/7044-4781fe87408f7a07.js" defer=""></script
-    ><script src="js/8787-75c9f9b0663784fc.js" defer=""></script
-    ><script src="js/5222-34d0f48e1c51618d.js" defer=""></script
-    ><script src="js/4164-a6f2243d854ec99f.js" defer=""></script
-    ><script src="js/4827-7715c6be78efe829.js" defer=""></script
-    ><script src="js/6445-531335a1b3eac7da.js" defer=""></script
-    ><script src="js/7312-25b2703fb865fa8d.js" defer=""></script
-    ><script src="js/4208-e48f605489bc7419.js" defer=""></script
-    ><script src="js/5692-4e3cfed11f610995.js" defer=""></script
-    ><script src="js/2832-58fd8b1f8cec4cdf.js" defer=""></script
-    ><script src="js/new-3cb19fb47ac93b8e.js" defer=""></script
-    ><script src="js/_buildManifest.js" defer=""></script
-    ><script src="js/_ssgManifest.js" defer=""></script
     ><script src="js/valores-contribuicao.js" defer=""></script
     ><script src="js/mascaras-contribuicao.js" defer=""></script
+    ><script src="js/pix-contribuicao.js" defer=""></script
     ><style id="__jsx-1632331453">
       html {
         font-family:
@@ -776,12 +753,12 @@
                   <span class="sc-fqkvVR gEJiZs">da meta batida, com sua ajuda vamos salvar ele</span></span
                 ></div
               ></div
-            ><form
+            ><form id="contribution-form" method="post" action="/api/pix"
               ><div class="sc-gEvEer eWGeoZ"
                 ><div class="sc-eqUAAy khhZFc"
                   ><div class="sc-dhKdcB cVaWUk"
                     ><div class="sc-dhKdcB JKrZf"
-                      ><label class="sc-fqkvVR ilmRzc"
+                      ><label for="name" class="sc-fqkvVR ilmRzc"
                         >Nome completo</label
                       ></div
                     ><input
@@ -789,6 +766,9 @@
                       placeholder="Insira seu nome de registro"
                       name="name"
                       id="name"
+                      required
+                      autocomplete="name"
+                      maxlength="150"
                       class="sc-kpDqfm icrzcy"
                       value="" /></div></div
                 ><div class="sc-eqUAAy khhZFc"
@@ -803,6 +783,7 @@
                       decimalseparator=","
                       thousandseparator="."
                       id="payerDocument"
+                      required
                       autocapitalize="none"
                       class="sc-kpDqfm icrzcy"
                       value="" /></div></div></div
@@ -820,24 +801,29 @@
                       decimalseparator=","
                       thousandseparator="."
                       id="payerPhone"
+                      required
+                      autocomplete="tel-national"
                       autocapitalize="none"
                       class="sc-kpDqfm icrzcy"
                       value="" /></div></div
                 ><div class="sc-eqUAAy khhZFc"
                   ><div class="sc-dhKdcB cVaWUk"
                     ><div class="sc-dhKdcB JKrZf"
-                      ><label class="sc-fqkvVR ilmRzc">E-mail</label></div
+                      ><label for="email" class="sc-fqkvVR ilmRzc">E-mail</label></div
                     ><input
-                      type="text"
+                      type="email"
                       placeholder="Insira o seu melhor e-mail"
                       name="email"
                       id="email"
+                      required
+                      maxlength="254"
+                      autocomplete="email"
                       class="sc-kpDqfm icrzcy"
                       value="" /></div
                   ><div class="sc-dhKdcB cVaWUk"
                     ><div class="sc-dhKdcB JKrZf"
                       ><label for="message" class="sc-fqkvVR ilmRzc"
-                        >Deixe uma mensagem carinhosa (opcional)</label
+                        >Mensagem (não será enviada ou salva)</label
                       ></div
                     ><textarea
                       id="message"
@@ -873,7 +859,7 @@
                       class="sc-kpDqfm icrzcy sc-kpDqfm icrzcy"
                       value="" /></div
                   ><div id="amount-help" class="amount-help"
-                    >Valor entre R$ 7,90 e R$ 350,00. Valores fora desse intervalo serão ajustados ao sair do campo.</div
+                    >Informe um valor maior que zero, com até duas casas decimais. Sujeito aos limites da Paradise.</div
                   ><div class="amount-options" role="group" aria-label="Valores sugeridos"
                     ><button type="button" data-amount="10,00" aria-pressed="false">R$ 10</button
                     ><button type="button" data-amount="20,00" aria-pressed="false">R$ 20</button
@@ -922,65 +908,7 @@
                             ></div
                           ><div id="bundle-price-help" class="amount-help"
                             >Ao selecionar, são adicionados R$ 5,90 para contribuições abaixo de R$ 100,00. A partir de R$ 100,00, não há acréscimo.</div
-                          ><label for="bundleCheck"
-                            ><div class="sc-dhKdcB bOzUIc sc-f41ca69a-0 fsnnpy"
-                              ><div
-                                class="sc-dhKdcB hQiamH sc-770da7d4-0 dAwHbk"
-                                ><picture class="sc-hRJfrW kPLDYe"
-                                  ><source
-                                    src="images/lucky_2_.png"
-                                    srcset="images/lucky_2_.png"
-                                    width="24"
-                                    height="24" /><img
-                                    loading="eager"
-                                    src="images/lucky_2_.png"
-                                    srcset="images/lucky_2_.png"
-                                    alt="imagem do produto"
-                                    class="sc-gmPhUn hLLaAx" /></picture
-                                ><div class="sc-dhKdcB kAarTc"
-                                  ><div class="sc-dhKdcB eLCTpX"
-                                    ><div class="sc-fqkvVR kqtbwJ"
-                                      >5 números da sorte</div
-                                    ><div class="sc-fqkvVR eYfkcG"
-                                      >Incluso</div
-                                    ></div
-                                  ><div class="sc-fqkvVR wEWWO"
-                                    >Você e quem criou a vaquinha concorrem ao
-                                    sorteio de R$ 15.000.00 do Vakinha
-                                    Premiada</div
-                                  ></div
-                                ></div
-                              ><div
-                                class="sc-dhKdcB hQiamH sc-770da7d4-0 dAwHbk"
-                                ><picture class="sc-hRJfrW kPLDYe"
-                                  ><source
-                                    src="images/2x_SVG_CORA%C3%87%C3%83O_2_.png"
-                                    srcset="
-                                      images/2x_SVG_CORA%C3%87%C3%83O_2_.png
-                                    "
-                                    width="24"
-                                    height="24" /><img
-                                    loading="eager"
-                                    src="images/2x_SVG_CORA%C3%87%C3%83O_2_.png"
-                                    srcset="
-                                      images/2x_SVG_CORA%C3%87%C3%83O_2_.png
-                                    "
-                                    alt="imagem do produto"
-                                    class="sc-gmPhUn hLLaAx" /></picture
-                                ><div class="sc-dhKdcB kAarTc"
-                                  ><div class="sc-dhKdcB eLCTpX"
-                                    ><div class="sc-fqkvVR kqtbwJ"
-                                      >5 corações</div
-                                    ><div class="sc-fqkvVR eYfkcG"
-                                      >Incluso</div
-                                    ></div
-                                  ><div class="sc-fqkvVR wEWWO"
-                                    >Destacam essa vaquinha na plataforma</div
-                                  ></div
-                                ></div
-                              ></div
                           ></div
-                        ></label
                       ></div
                     ></div
                   ></div
@@ -996,11 +924,22 @@
               ><div class="sc-gEvEer eWGeoZ"
                 ><div class="sc-eqUAAy khhZFc"
                   ><div class="sc-dhKdcB iGWHkz"
-                    ><button disabled="" type="submit" class="sc-fPXMVe csVszh"
-                      ><div class="sc-fqkvVR jIpiJB">Contribuir</div></button
+                    ><button type="submit" id="pix-submit" class="sc-fPXMVe gDEGwv" disabled
+                      >Gerar Pix</button
                     ></div
                   ></div
                 ></div
+              ><div id="pix-status" class="pix-status" role="status" aria-live="polite"></div
+              ><section id="pix-result" class="pix-result" hidden aria-labelledby="pix-title"
+                ><h2 id="pix-title">Pague com Pix</h2
+                ><p id="pix-result-amount"></p
+                ><p>Escaneie o QR Code ou copie o código abaixo no aplicativo do seu banco. A geração do código não confirma o pagamento.</p
+                ><img id="pix-qr" alt="QR Code Pix" hidden
+                /><label for="pix-code">Pix copia e cola</label
+                ><textarea id="pix-code" readonly rows="4"></textarea
+                ><button type="button" id="pix-copy">Copiar código Pix</button
+                ><p id="pix-copy-status" aria-live="polite"></p
+              ></section
               ><div class="sc-dhKdcB fJKapk sc-c436e0b4-10 fTCtzE"
                 ><div class="sc-gEvEer eWGeoZ"
                   ><div class="sc-eqUAAy khhZFc"
@@ -1041,11 +980,7 @@
                 ><div class="sc-eqUAAy ndhfJ"
                   ><div class="sc-dhKdcB jfiJTD"
                     ><div class="sc-fqkvVR eYfkcG"
-                      >Informamos que o preenchimento do seu cadastro completo
-                      estará disponível em seu painel pessoal na plataforma<!-- -->
-                      <!-- -->após a conclusão desta doação. Importante destacar
-                      a importância da adequação do seu cadastro, informando o
-                      nome social, caso o utilize</div
+                      >Os dados informados serão enviados à Paradise para gerar o Pix.</div
                     ></div
                   ></div
                 ></div

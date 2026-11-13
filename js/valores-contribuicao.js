@@ -23,8 +23,6 @@
     return;
   }
 
-  let automaticBundle = false;
-  let aboveBonusThreshold = false;
   const currency = new Intl.NumberFormat("pt-BR", {
     style: "currency",
     currency: "BRL",
@@ -32,12 +30,16 @@
 
   function validate(showEmptyError) {
     const text = amount.value.trim();
-    const validFormat = /^-?\d+(?:[,.]\d{1,2})?$/.test(text);
-    const value = validFormat ? Number(text.replace(",", ".")) : NaN;
-    const valid = validFormat && value >= 7.9 && value <= 350;
+    const match = /^(\d+)(?:[,.](\d{1,2}))?$/.exec(text);
+    const cents = match
+      ? Number(match[1]) * 100 + Number((match[2] || "").padEnd(2, "0"))
+      : NaN;
+    const valid = Number.isSafeInteger(cents) && cents > 0 &&
+      Number.isSafeInteger(cents + 590);
+    const value = cents / 100;
     const message = valid
       ? ""
-      : "Informe um valor entre R$ 7,90 e R$ 350,00, com até duas casas decimais.";
+      : "Informe um valor maior que zero, com até duas casas decimais.";
 
     amount.setCustomValidity(message);
     error.textContent = text || showEmptyError ? message : "";
@@ -48,17 +50,6 @@
         ? "—"
         : currency.format(0);
     contributionTotal.textContent = `Contribuição: ${formattedValue}`;
-    if (valid) {
-      const aboveThreshold = value > 75;
-      if (aboveThreshold && !aboveBonusThreshold) {
-        bundle.checked = true;
-        automaticBundle = true;
-      } else if (!aboveThreshold && aboveBonusThreshold && automaticBundle) {
-        bundle.checked = false;
-        automaticBundle = false;
-      }
-      aboveBonusThreshold = aboveThreshold;
-    }
     const fee = valid && value < 100 ? 5.9 : 0;
     bundlePrice.textContent = valid
       ? fee
@@ -69,7 +60,7 @@
     bundleTotal.textContent = `Turbine: ${currency.format(fee)}`;
     paymentTotal.textContent = `Total: ${
       valid && bundle.checked
-        ? currency.format((Math.round(value * 100) + Math.round(fee * 100)) / 100)
+        ? currency.format((cents + (fee ? 590 : 0)) / 100)
         : formattedValue
     }`;
     buttons.forEach((button) => {
@@ -82,10 +73,7 @@
     });
   }
 
-  bundle.addEventListener("change", () => {
-    automaticBundle = false;
-    validate(false);
-  });
+  bundle.addEventListener("change", () => validate(false));
 
   buttons.forEach((button) => {
     button.addEventListener("click", () => {
@@ -94,21 +82,9 @@
     });
   });
   amount.addEventListener("input", () => validate(false));
-  amount.addEventListener("blur", () => {
-    const text = amount.value.trim();
-    if (/^-?\d+(?:[,.]\d{1,2})?$/.test(text)) {
-      const value = Number(text.replace(",", "."));
-      if (value < 7.9 || value > 350) {
-        amount.value = value < 7.9 ? "7,90" : "350,00";
-        amount.dispatchEvent(new Event("input", { bubbles: true }));
-      }
-    }
-    validate(true);
-  });
+  amount.addEventListener("blur", () => validate(true));
   form.addEventListener("reset", () =>
     setTimeout(() => {
-      automaticBundle = false;
-      aboveBonusThreshold = false;
       validate(false);
     }, 0),
   );

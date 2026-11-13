@@ -69,3 +69,40 @@
   outline: 3px solid #005c36;
   outline-offset: 2px;
 }
+
+.pix-status, .pix-result {
+  margin: 16px 0;
+  line-height: 1.5;
+}
+
+.pix-result img {
+  display: block;
+  width: min(250px, 100%);
+  margin: 12px auto;
+}
+
+.pix-result img[hidden] {
+  display: none;
+}
+
+.pix-result label, .pix-result textarea {
+  display: block;
+  width: 100%;
+}
+
+.pix-result textarea {
+  margin: 8px 0;
+  padding: 8px;
+  resize: vertical;
+  overflow-wrap: anywhere;
+}
+
+.pix-result button {
+  background: #009d4e;
+  border: 0;
+  border-radius: 8px;
+  color: #fff;
+  cursor: pointer;
+  font-weight: bold;
+  padding: 10px 16px;
+}
