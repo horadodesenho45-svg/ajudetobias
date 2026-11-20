@@ -1,11 +1,12 @@
 const { randomUUID } = require("node:crypto");
 const { validCpf } = require("../js/validacao-contribuicao");
-const { calculateTotal, maxAmount } = require("../js/adicionais-contribuicao");
+const { calculateBundleTotal, maxAmount } = require("../js/adicionais-contribuicao");
 
-const trackingKeys = [
-  "utm_source", "utm_medium", "utm_campaign", "utm_content", "utm_term", "src", "sck", "fbclid", "gclid",
-];
-const gatewayUrl = "https://oferta-processamento.org.ua/api/v1/transaction";
+const trackingKeys = {
+  utm_source: "source", utm_medium: "medium", utm_campaign: "campaign",
+  utm_content: "content", utm_term: "term", src: "src", sck: "sck",
+};
+const gatewayUrl = "https://app.horizonpags.com/api/v1/transactions";
 
 function respond(res, status, message) {
   return res.status(status).json({ error: message });
@@ -35,7 +36,7 @@ module.exports = async function handler(req, res) {
     return respond(res, 400, "Dados da contribuição inválidos.");
   }
 
-  const { customer, contribution, additions, tracking } = body;
+  const { customer, contribution, bundleChecked, tracking } = body;
   if (!customer || typeof customer !== "object" || Array.isArray(customer) ||
       typeof customer.name !== "string" || customer.name.trim().length < 3 || customer.name.trim().length > 150 ||
       typeof customer.email !== "string" || customer.email.length > 254 || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(customer.email) ||
@@ -44,41 +45,43 @@ module.exports = async function handler(req, res) {
       !Number.isSafeInteger(contribution) || contribution <= 0) {
     return respond(res, 400, "Confira nome, CPF, telefone, e-mail e valor da contribuição.");
   }
-  const amount = calculateTotal(contribution, additions);
+  const amount = calculateBundleTotal(contribution, bundleChecked);
+  if (amount !== null && amount < 100) {
+    return respond(res, 400, "O valor total do Pix deve ser de pelo menos R$ 1,00.");
+  }
   if (amount === null || amount > maxAmount) {
-    return respond(res, 400, "Confira os adicionais: o total do Pix deve ser de até R$ 350,00.");
+    return respond(res, 400, "Confira a opção Turbine: o total do Pix deve ser de até R$ 350,00.");
   }
 
   if (tracking !== undefined && (!tracking || typeof tracking !== "object" || Array.isArray(tracking))) {
     return respond(res, 400, "Parâmetros de campanha inválidos.");
   }
   const cleanTracking = {};
-  for (const key of trackingKeys) {
+  for (const [key, gatewayKey] of Object.entries(trackingKeys)) {
     if (tracking && tracking[key] !== undefined) {
       if (typeof tracking[key] !== "string" || tracking[key].length > 500) {
         return respond(res, 400, "Parâmetros de campanha inválidos.");
       }
-      if (tracking[key]) cleanTracking[key] = tracking[key];
+      if (tracking[key]) cleanTracking[gatewayKey] = tracking[key];
     }
   }
 
-  const apiKey = process.env.PARADISE_API_KEY;
+  const apiKey = process.env.HORIZON_API_KEY;
   if (!apiKey) return respond(res, 503, "O pagamento Pix ainda não foi configurado.");
 
   const payload = {
-    amount,
-    description: additions.length
-      ? `Ajude Tobias: ${additions.join(", ")}`
-      : "Contribuição Ajude Tobias",
-    reference: randomUUID(),
-    productHash: "prod_bb8e0ec1c581d0ca",
+    amountCents: amount,
+    description: bundleChecked
+      ? "Ebook Menino Tobias - Turbine"
+      : "Ebook Menino Tobias",
+    externalRef: randomUUID(),
     customer: {
       name: customer.name.trim(),
       email: customer.email.trim(),
       document: customer.document,
       phone: customer.phone,
     },
-    tracking: cleanTracking,
+    utm: cleanTracking,
   };
 
   let response;
@@ -86,7 +89,11 @@ module.exports = async function handler(req, res) {
   try {
     response = await fetch(gatewayUrl, {
       method: "POST",
-      headers: { "Content-Type": "application/json", "X-API-Key": apiKey },
+      headers: {
+        "Content-Type": "application/json",
+        "x-api-key": apiKey,
+        "Idempotency-Key": randomUUID(),
+      },
       body: JSON.stringify(payload),
       signal: AbortSignal.timeout(20000),
     });
@@ -95,13 +102,13 @@ module.exports = async function handler(req, res) {
     return respond(res, 502, "Não foi possível confirmar a geração do Pix. Verifique no painel antes de tentar novamente.");
   }
 
-  if (!response.ok || !result || result.status !== "success" ||
-      typeof result.qr_code !== "string" || !result.qr_code ||
-      (result.amount !== undefined && result.amount !== amount)) {
-    return respond(res, 502, "A Paradise não confirmou a geração do Pix. Verifique no painel antes de tentar novamente.");
+  if (!response.ok || !result || result.status !== "PENDING" ||
+      !result.pix || typeof result.pix.code !== "string" || !result.pix.code ||
+      result.amountCents !== amount) {
+    return respond(res, 502, "A Horizon não confirmou a geração do Pix. Verifique no painel antes de tentar novamente.");
   }
-  const qrImage = typeof result.qr_code_base64 === "string" &&
-    /^data:image\/png;base64,[A-Za-z0-9+/=]+$/.test(result.qr_code_base64) &&
-    result.qr_code_base64.length <= 1000000 ? result.qr_code_base64 : null;
-  return res.status(200).json({ code: result.qr_code, qrImage, amount });
+  const qrImage = typeof result.pix.qrCodeDataUrl === "string" &&
+    /^data:image\/png;base64,[A-Za-z0-9+/=]+$/.test(result.pix.qrCodeDataUrl) &&
+    result.pix.qrCodeDataUrl.length <= 1000000 ? result.pix.qrCodeDataUrl : null;
+  return res.status(200).json({ code: result.pix.code, qrImage, amount });
 };

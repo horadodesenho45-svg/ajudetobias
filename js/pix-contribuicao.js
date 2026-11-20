@@ -15,14 +15,13 @@
   const name = document.getElementById("name");
   const email = document.getElementById("email");
   const amount = document.getElementById("amount");
-  const additions = document.querySelectorAll('input[name="additions"]');
+  const bundle = document.getElementById("bundleCheck");
   const additionsConfig = window.contributionAdditions;
   const keys = ["utm_source", "utm_medium", "utm_campaign", "utm_content", "utm_term", "src", "sck", "fbclid", "gclid"];
 
   if (!form || !submit || !validation || !status || !result || !resultAmount ||
       !instructions || !code || !qr || !copy || !copyStatus || !cpf || !phone ||
-      !name || !email || !amount || !additionsConfig ||
-      additions.length !== Object.keys(additionsConfig.prices).length || !window.contributionValidation) {
+      !name || !email || !amount || !bundle || !additionsConfig || !window.contributionValidation) {
     console.error("Não foi possível inicializar o pagamento Pix.");
     return;
   }
@@ -76,7 +75,7 @@
         phone: phone.value.replace(/\D/g, ""),
       },
       contribution,
-      additions: Array.from(additions).filter((input) => input.checked).map((input) => input.value),
+      bundleChecked: bundle.checked,
       tracking,
     };
 
@@ -98,7 +97,7 @@
         status.textContent = body.error || "Não foi possível gerar o Pix. Verifique no painel antes de tentar novamente.";
         return;
       }
-      const expectedAmount = additionsConfig.calculateTotal(contribution, data.additions);
+      const expectedAmount = additionsConfig.calculateBundleTotal(contribution, data.bundleChecked);
       if (typeof body.code !== "string" || !body.code || body.amount !== expectedAmount) {
         status.textContent = "Resposta Pix inválida. Verifique no painel antes de tentar novamente.";
         return;
@@ -110,7 +109,7 @@
       qr.hidden = !body.qrImage;
       instructions.textContent = body.qrImage
         ? "Escaneie o QR Code ou copie o código abaixo no aplicativo do seu banco. A geração do código não confirma o pagamento."
-        : "A Paradise não forneceu o QR Code. Copie o código abaixo no aplicativo do seu banco. A geração do código não confirma o pagamento.";
+        : "A Horizon não forneceu o QR Code. Copie o código abaixo no aplicativo do seu banco. A geração do código não confirma o pagamento.";
       if (body.qrImage) qr.src = body.qrImage;
       else qr.removeAttribute("src");
       copyStatus.textContent = "";

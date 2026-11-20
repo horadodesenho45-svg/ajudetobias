@@ -612,7 +612,7 @@
   pointer-events: none;
 }
 #nprogress .bar {
-  background: #24ca68;
+  background: #f45102;
   position: fixed;
   z-index: 1200;
   top: 0;
@@ -752,10 +752,10 @@
     --color-gray-600: #282828;
     --color-pink-400: #fd7dbe;
     --color-green-200: #d4fac3;
-    --color-green-400: #24ca68;
-    --color-green-500: #009d4e;
-    --color-green-600: #007a48;
-    --color-green-700: #025432;
+    --color-green-400: #f45102;
+    --color-green-500: #c43d00;
+    --color-green-600: #9e3100;
+    --color-green-700: #742400;
     --color-yellow-400: #ffcb2e;
     --color-yellow-450: #ffc107;
     --font-montserrat: var(--font-montserrat);

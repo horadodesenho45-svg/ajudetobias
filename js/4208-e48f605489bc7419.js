@@ -6,134 +6,134 @@
       let t = (0, n(24928).A)()
           .add({
             name: "campaignCreationTips",
-            pattern: "/criar-vaquinha/dicas",
+            pattern: "/criar-contribuição/dicas",
             page: "campaignCreation/tips/tips",
           })
           .add({
             name: "campaignCreationImage",
-            pattern: "/criar-vaquinha/imagem",
+            pattern: "/criar-contribuição/imagem",
             page: "campaignCreation/image/image",
           })
           .add({
             name: "campaingAcceptFeatures",
-            pattern: "/criar-vaquinha/aceitar-funcionalidades",
+            pattern: "/criar-contribuição/aceitar-funcionalidades",
             page: "campaignCreation/acceptFeatures/acceptFeatures",
           })
           .add({
             name: "campaignCreationReward",
-            pattern: "/criar-vaquinha/recompensa",
+            pattern: "/criar-contribuição/recompensa",
             page: "campaignCreation/reward/reward",
           })
           .add({
             name: "campaignCreationRecurrence",
-            pattern: "/criar-vaquinha/recorrencia",
+            pattern: "/criar-contribuição/recorrencia",
             page: "campaignCreation/recurrence/recurrence",
           })
           .add({
             name: "campaignCreationDescription",
-            pattern: "/criar-vaquinha/descricao",
+            pattern: "/criar-contribuição/descricao",
             page: "campaignCreation/description/description",
           })
           .add({
             name: "campaignCreationHaveAccount",
-            pattern: "/criar-vaquinha/login",
+            pattern: "/criar-contribuição/login",
             page: "campaignCreation/haveAccount/haveAccount",
           })
           .add({
             name: "campaignCreationPersonalData",
-            pattern: "/criar-vaquinha/informe-seus-dados",
+            pattern: "/criar-contribuição/informe-seus-dados",
             page: "campaignCreation/personalData/personalData",
           })
           .add({
             name: "campaignCreationFirstDonation",
-            pattern: "/criar-vaquinha/primeira-doacao",
+            pattern: "/criar-contribuição/primeira-doacao",
             page: "campaignCreation/firstDonation/firstDonation",
           })
           .add({
             name: "campaignCreationShareCampaign",
-            pattern: "/criar-vaquinha/compartilhe",
+            pattern: "/criar-contribuição/compartilhe",
             page: "campaignCreation/shareCampaign/shareCampaign",
           })
           .add({
             name: "campaignCreationBeneficiaryCategory",
-            pattern: "/criar-vaquinha/categoria",
+            pattern: "/criar-contribuição/categoria",
             page: "campaignCreation/beneficiaryCategory/beneficiaryCategory",
           })
           .add({
             name: "campaignCreationContinue",
-            pattern: "/criar-vaquinha/continue",
+            pattern: "/criar-contribuição/continue",
             page: "campaignCreation/continue/continue",
           })
           .add({
             name: "campaignCreationGuided",
-            pattern: "/criar-vaquinha/guiada",
+            pattern: "/criar-contribuição/guiada",
             page: "campaignCreation/guided/guided",
           })
           .add({
             name: "campaignCreationInitialCreation",
-            pattern: "/criar-vaquinha",
+            pattern: "/criar-contribuição",
             page: "campaignCreation/initialCreation/initialCreation",
           })
           .add({
             name: "newCampaignAdopt",
-            pattern: "/vaquinha/:slug/adotar-vaquinha/:page?",
+            pattern: "/contribuição/:slug/adotar-contribuição/:page?",
             page: "campaign/newAdoptWizard/start",
           })
           .add({
             name: "showCampaign",
-            pattern: "/vaquinha/:slug",
+            pattern: "/contribuição/:slug",
             page: "campaign/show/show",
           })
           .add({
             name: "authCampaign",
-            pattern: "/vaquinha/:slug/autenticar",
+            pattern: "/contribuição/:slug/autenticar",
             page: "campaign/authenticate/authenticate",
           })
           .add({
             name: "testCampaignImage",
-            pattern: "/vaquinha/:slug/teste-de-imagem",
+            pattern: "/contribuição/:slug/teste-de-imagem",
             page: "campaign/imageTest/imageTest",
           })
           .add({
             name: "thanksPayment",
-            pattern: "/vaquinha/:slug/obrigado/:contributionId",
+            pattern: "/contribuição/:slug/obrigado/:contributionId",
             page: "campaign/thanks/thanks",
           })
           .add({
             name: "thanksPix",
             pattern:
-              "/vaquinha/:slug/obrigado-por-sua-contribuicao/:contributionId",
+              "/contribuição/:slug/obrigado-por-sua-contribuicao/:contributionId",
             page: "campaign/thanks/thanksPix",
           })
           .add({
             name: "thanksPaymentSubscription",
             pattern:
-              "/vaquinha/:slug/obrigado-pela-contribuicao/:subscriptionId",
+              "/contribuição/:slug/obrigado-pela-contribuicao/:subscriptionId",
             page: "campaign/thanks/thanks_subscription",
           })
           .add({
             name: "paymentFailed",
-            pattern: "/vaquinha/:slug/falha/:contributionId",
+            pattern: "/contribuição/:slug/falha/:contributionId",
             page: "campaign/thanks/paymentFailed",
           })
           .add({
             name: "paymentUnderAnalysis",
-            pattern: "/vaquinha/:slug/pagamento-em-analise/:contributionId",
+            pattern: "/contribuição/:slug/pagamento-em-analise/:contributionId",
             page: "campaign/thanks/underAnalysis",
           })
           .add({
             name: "newComplaint",
-            pattern: "/vaquinha/:slug/denuncie",
+            pattern: "/contribuição/:slug/denuncie",
             page: "campaign/complaint/complaint",
           })
           .add({
             name: "shareImages",
-            pattern: "/vaquinha/:slug/compartilhe-sua-vaquinha",
+            pattern: "/contribuição/:slug/compartilhe-sua-contribuição",
             page: "campaign/share/share",
           })
           .add({
             name: "shareBio",
-            pattern: "/vaquinha/:slug/vakinha-bio",
+            pattern: "/contribuição/:slug/vakinha-bio",
             page: "campaign/vakinhaBio/vakinhaBio",
           })
           .add({
@@ -143,7 +143,7 @@
           })
           .add({
             name: "sharePixKey",
-            pattern: "/vaquinha/:slug/compartilhe-chave-pix",
+            pattern: "/contribuição/:slug/compartilhe-chave-pix",
             page: "campaign/sharePixKey/sharePixKey",
           })
           .add({
@@ -153,17 +153,17 @@
           })
           .add({
             name: "tellUsHints",
-            pattern: "/vaquinha/:id/dicas/conte-seu-problema",
+            pattern: "/contribuição/:id/dicas/conte-seu-problema",
             page: "campaign/hints/tellUsHints/tellUsHints",
           })
           .add({
             name: "hints",
-            pattern: "/vaquinha/:id/dicas/:topic",
+            pattern: "/contribuição/:id/dicas/:topic",
             page: "campaign/hints/hints",
           })
           .add({
             name: "thanksDonation",
-            pattern: "/vaquinha/:slug/obrigado-por-fazer-o-bem/edlwejfLIJFE",
+            pattern: "/contribuição/:slug/obrigado-por-fazer-o-bem/edlwejfLIJFE",
             page: "campaign/thanksDonation/thanksDonation",
           })
           .add({ name: "home", pattern: "/", page: "/home/home" })
@@ -174,12 +174,12 @@
           })
           .add({
             name: "explore",
-            pattern: "/vaquinhas/explore",
+            pattern: "/contribuições/explore",
             page: "campaign/explore/explore",
           })
           .add({
             name: "timeline",
-            pattern: "/vaquinhas/mundo-das-vaquinhas",
+            pattern: "/contribuições/mundo-das-contribuições",
             page: "campaign/events/events",
           })
           .add({
@@ -199,7 +199,7 @@
           })
           .add({
             name: "search",
-            pattern: "/buscar-vaquinha",
+            pattern: "/buscar-contribuição",
             page: "campaign/search/search",
           })
           .add({
@@ -214,37 +214,37 @@
           })
           .add({
             name: "searchSingleParam",
-            pattern: "/buscar-vaquinha/:param",
+            pattern: "/buscar-contribuição/:param",
             page: "campaign/search/search",
           })
           .add({
             name: "searchCategoryLocation",
-            pattern: "/buscar-vaquinha/:category/:location",
+            pattern: "/buscar-contribuição/:category/:location",
             page: "campaign/search/search",
           })
           .add({
             name: "lovedCampaigns",
-            pattern: "/vaquinhas/mais-amadas",
+            pattern: "/contribuições/mais-amadas",
             page: "campaign/lovedCampaigns/lovedCampaigns",
           })
           .add({
             name: "lovedCampaignsCategories",
-            pattern: "/vaquinhas/mais-amadas/categorias",
+            pattern: "/contribuições/mais-amadas/categorias",
             page: "campaign/lovedCampaignsCategories/lovedCampaignsCategories",
           })
           .add({
             name: "lovedCampaignsList",
-            pattern: "/vaquinhas/mais-amadas/lista",
+            pattern: "/contribuições/mais-amadas/lista",
             page: "campaign/lovedCampaignsList/lovedCampaignsList",
           })
           .add({
             name: "lovedCampaignsListCategory",
-            pattern: "/vaquinhas/mais-amadas/:category/lista",
+            pattern: "/contribuições/mais-amadas/:category/lista",
             page: "campaign/lovedCampaignsList/lovedCampaignsList",
           })
           .add({
             name: "lovedCampaignsListLocation",
-            pattern: "/vaquinhas/mais-amadas/:category/:location/lista",
+            pattern: "/contribuições/mais-amadas/:category/:location/lista",
             page: "campaign/lovedCampaignsList/lovedCampaignsList",
           })
           .add({
@@ -265,7 +265,7 @@
           })
           .add({
             name: "campaignSuggest",
-            pattern: "/sugira-uma-vaquinha",
+            pattern: "/sugira-uma-contribuição",
             page: "campaignSuggest/campaignSuggest",
           })
           .add({ name: "blog", pattern: "/blog", page: "blog/blog" })
@@ -356,12 +356,12 @@
           })
           .add({
             name: "newContribution",
-            pattern: "/vaquinha/:slug/contribua",
+            pattern: "/contribuição/:slug/contribua",
             page: "contributions/new/new",
           })
           .add({
             name: "newDonorsClubContribution",
-            pattern: "/vaquinha/:slug/participe",
+            pattern: "/contribuição/:slug/participe",
             page: "contributions/donorsClubNew/donorsClubNew",
           })
           .add({
@@ -431,7 +431,7 @@
           })
           .add({
             name: "myPrizeVakinhas",
-            pattern: "/usuario/vakinha-da-sorte/vaquinhas",
+            pattern: "/usuario/vakinha-da-sorte/contribuições",
             page: "user/prizeVakinha/prizeVakinhas",
           })
           .add({
@@ -451,12 +451,12 @@
           })
           .add({
             name: "myCampaigns",
-            pattern: "/usuario/vaquinhas",
+            pattern: "/usuario/contribuições",
             page: "user/campaigns/campaigns",
           })
           .add({
             name: "startFirstCampaign",
-            pattern: "/usuario/vaquinhas/comece-agora",
+            pattern: "/usuario/contribuições/comece-agora",
             page: "user/campaigns/startFirstCampaign",
           })
           .add({
@@ -496,12 +496,12 @@
           })
           .add({
             name: "campaignBalance",
-            pattern: "/usuario/vaquinha/:slug",
+            pattern: "/usuario/contribuição/:slug",
             page: "user/campaigns/balance/balance",
           })
           .add({
             name: "campaignExtract",
-            pattern: "/usuario/vaquinha/:slug/extrato",
+            pattern: "/usuario/contribuição/:slug/extrato",
             page: "user/campaigns/extract/extract",
           })
           .add({
@@ -516,37 +516,37 @@
           })
           .add({
             name: "news",
-            pattern: "/usuario/vaquinha/:slug/atualizacoes",
+            pattern: "/usuario/contribuição/:slug/atualizacoes",
             page: "user/campaigns/news/news",
           })
           .add({
             name: "statistics",
-            pattern: "/usuario/vaquinha/:slug/estatisticas",
+            pattern: "/usuario/contribuição/:slug/estatisticas",
             page: "user/campaigns/statistics/statistics",
           })
           .add({
             name: "spotlightView",
-            pattern: "/usuario/vaquinha/:slug/estatisticas/ver-anuncio",
+            pattern: "/usuario/contribuição/:slug/estatisticas/ver-anuncio",
             page: "user/campaigns/spotlightView/spotlightView",
           })
           .add({
             name: "campaignDonors",
-            pattern: "/usuario/vaquinha/:slug/doacoes-recebidas",
+            pattern: "/usuario/contribuição/:slug/doacoes-recebidas",
             page: "user/campaigns/donors/donors",
           })
           .add({
             name: "campaignPanel",
-            pattern: "/usuario/vaquinha/:slug/painel",
+            pattern: "/usuario/contribuição/:slug/painel",
             page: "user/campaigns/panel/panel",
           })
           .add({
             name: "impactBox",
-            pattern: "/usuario/vaquinha/:slug/caixinha",
+            pattern: "/usuario/contribuição/:slug/caixinha",
             page: "user/campaigns/impactBox/impactBox",
           })
           .add({
             name: "createImpactBox",
-            pattern: "/usuario/vaquinha/:slug/caixinha/criar",
+            pattern: "/usuario/contribuição/:slug/caixinha/criar",
             page: "user/campaigns/impactBox/createImpactBox/createImpactBox",
           })
           .add({
@@ -641,7 +641,7 @@
           })
           .add({
             name: "createNews",
-            pattern: "/usuario/vaquinha/:slug/atualizacoes/criar",
+            pattern: "/usuario/contribuição/:slug/atualizacoes/criar",
             page: "user/campaigns/news/createNews/createNews",
           })
           .add({
@@ -661,12 +661,12 @@
           })
           .add({
             name: "campaignEdit",
-            pattern: "/usuario/vaquinha/:slug/editar",
+            pattern: "/usuario/contribuição/:slug/editar",
             page: "user/campaigns/edit/campaignEdit",
           })
           .add({
             name: "coOwners",
-            pattern: "/usuario/vaquinha/:slug/equipe",
+            pattern: "/usuario/contribuição/:slug/equipe",
             page: "user/campaigns/coOwners/coOwners",
           })
           .add({
@@ -751,24 +751,24 @@
           })
           .add({
             name: "cancelReceivingNews",
-            pattern: "/usuario/vaquinha/:slug/cancelar-recebimento-noticias",
+            pattern: "/usuario/contribuição/:slug/cancelar-recebimento-noticias",
             page: "user/campaigns/news/cancelReceivingNews/cancelReceivingNews",
           })
           .add({
             name: "cancelReceivingContributionsWeek",
             pattern:
-              "/usuario/vaquinha/:slug/cancelar-recebimento-prestacao-contas",
+              "/usuario/contribuição/:slug/cancelar-recebimento-prestacao-contas",
             page: "user/campaigns/cancelReceivingContributionsWeek/cancelReceivingContributionsWeek",
           })
           .add({
             name: "receivedStickers",
-            pattern: "/usuario/vaquinha/:slug/coracoes-recebidos",
+            pattern: "/usuario/contribuição/:slug/coracoes-recebidos",
             page: "user/campaigns/receivedStickers/receivedStickers",
           })
           .add({
             name: "balanceTransfer",
             pattern:
-              "/usuario/vaquinha/:slug/transferencia-de-saldo/:contributionId",
+              "/usuario/contribuição/:slug/transferencia-de-saldo/:contributionId",
             page: "user/balance/balanceTransfer",
           })
           .add({
@@ -843,17 +843,17 @@
           })
           .add({
             name: "campaignRescue",
-            pattern: "/usuario/vaquinha/:slug/resgatar-recompensa",
+            pattern: "/usuario/contribuição/:slug/resgatar-recompensa",
             page: "campaignRescue/campaignRescue",
           })
           .add({
             name: "completeCampaignActions",
-            pattern: "/usuario/vaquinha/:slug/completar-dados-da-vaquinha",
+            pattern: "/usuario/contribuição/:slug/completar-dados-da-contribuição",
             page: "completeCampaignActions/completeCampaignActions",
           })
           .add({
             name: "campaignActionsForSuccess",
-            pattern: "/usuario/vaquinha/:slug/acoes-para-o-sucesso",
+            pattern: "/usuario/contribuição/:slug/acoes-para-o-sucesso",
             page: "campaignActionsForSuccess/campaignActionsForSuccess",
           })
           .add({
@@ -1100,7 +1100,7 @@
           })
           .add({
             name: "rewardsCampaignCreation",
-            pattern: "/vaquinha-com-recompensa",
+            pattern: "/contribuição-com-recompensa",
             page: "landingPages/rewardsCampaignCreation/rewardsCampaignCreation",
           })
           .add({
@@ -1200,7 +1200,7 @@
           })
           .add({
             name: "lpCampaignByWhatsapp",
-            pattern: "/vaquinha-via-whatsapp",
+            pattern: "/contribuição-via-whatsapp",
             page: "landingPages/lpCampaignByWhatsapp/lpCampaignByWhatsapp",
           })
           .add({
@@ -1230,12 +1230,12 @@
           })
           .add({
             name: "lpHealth",
-            pattern: "/criar-vaquinha-saude",
+            pattern: "/criar-contribuição-saude",
             page: "landingPages/lpHealth/lpHealth",
           })
           .add({
             name: "lpHealthV2",
-            pattern: "/criar-vaquinha-saude-agora",
+            pattern: "/criar-contribuição-saude-agora",
             page: "landingPages/lpHealthV2/lpHealthV2",
           })
           .add({
@@ -1250,22 +1250,22 @@
           })
           .add({
             name: "createMoneyFundraiser",
-            pattern: "/criar-vaquinha-dinheiro",
+            pattern: "/criar-contribuição-dinheiro",
             page: "landingPages/lpCreateMoneyFundraiser/lpCreateMoneyFundraiser",
           })
           .add({
             name: "createCampaignForFree",
-            pattern: "/criar-vaquinha-gratis",
+            pattern: "/criar-contribuição-gratis",
             page: "landingPages/lpCreateCampaignForFree/lpCreateCampaignForFree",
           })
           .add({
             name: "createCampaignStepByStep",
-            pattern: "/criar-vaquinha-passo-a-passo",
+            pattern: "/criar-contribuição-passo-a-passo",
             page: "landingPages/lpCreateCampaignStepByStep/lpCreateCampaignStepByStep",
           })
           .add({
             name: "createCampaignForm",
-            pattern: "/criar-vaquinha-formulario",
+            pattern: "/criar-contribuição-formulario",
             page: "landingPages/lpCreateCampaignForm/lpCreateCampaignForm",
           })
           .add({
@@ -1295,7 +1295,7 @@
           })
           .add({
             name: "securityCheck",
-            pattern: "/verificar-vaquinha-segura-e-confiavel",
+            pattern: "/verificar-contribuição-segura-e-confiavel",
             page: "securityCheck/securityCheck",
           })
           .add({

@@ -433,7 +433,7 @@
               (null == e ? void 0 : e.complete) && l();
             },
             src: t.url,
-            alt: "Card da sua vaquinha",
+            alt: "Card da sua contribuição",
             loaded: r,
             hasSingleSlide: a,
             compact: i,
@@ -743,7 +743,7 @@
                   fontSizeMobile: 16,
                   color: "gray400",
                   children: A
-                    ? "Adicione um adesivo de link da vaquinha ao seu story."
+                    ? "Adicione um adesivo de link da contribuição ao seu story."
                     : (0, n.jsxs)(n.Fragment, {
                         children: [
                           (0, n.jsx)("strong", { children: "Baixe a imagem" }),
@@ -977,7 +977,7 @@
                     height: 32,
                     x: 23.5,
                     y: 17.278,
-                    fill: "#007A48",
+                    fill: "#9e3100",
                     rx: 16,
                   })),
                 i ||

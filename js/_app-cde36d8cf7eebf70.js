@@ -2093,7 +2093,7 @@
                   ? (c().push({ pathname: "/home/home" }, "/"), c().reload())
                   : "/" !== O.query.location && void 0 !== O.query.location
                     ? (c().push(
-                        (0, ei.A)(O.query.location, "/usuario/vaquinhas"),
+                        (0, ei.A)(O.query.location, "/usuario/contribuições"),
                       ),
                       delete O.query.location)
                     : c().reload());
@@ -10152,7 +10152,7 @@
       var r = n(29454),
         i = n(48720);
       let o =
-          "O rascunho do ChatGPT expirou ou j\xe1 foi usado. Preencha os dados para criar sua vaquinha.",
+          "O rascunho do ChatGPT expirou ou j\xe1 foi usado. Preencha os dados para criar sua contribuição.",
         a = "campaignCreationData",
         s = "campaignDraftToken",
         u = (e) => (0, i.omit)([s], e),
@@ -11985,15 +11985,15 @@
           gray400: "#5a5a5a",
           gray500: "#3a3a3a",
           gray600: "#282828",
-          green50: "#E9FBF0",
-          green100: "#EEFFE6",
-          green200: "#D4FAC3",
-          green250: "#AFF291",
-          green300: "#B1FA46",
-          green400: "#24ca68",
-          green500: "#009d4e",
-          green600: "#007a48",
-          green700: "#025432",
+          green50: "#FFF5EF",
+          green100: "#FFECE0",
+          green200: "#FFD5BD",
+          green250: "#FFC39F",
+          green300: "#FFAA78",
+          green400: "#F45102",
+          green500: "#C43D00",
+          green600: "#9E3100",
+          green700: "#742400",
           orange300: "#FFECE0",
           orange350: "#FFD5BD",
           orange400: "#FF8D4B",

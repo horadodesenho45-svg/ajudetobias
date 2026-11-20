@@ -18,7 +18,14 @@
     return Number.isSafeInteger(total) ? total : null;
   }
 
-  const config = { prices, maxAmount, calculateTotal };
+  function calculateBundleTotal(contribution, bundleChecked) {
+    if (!Number.isSafeInteger(contribution) || contribution <= 0 ||
+        typeof bundleChecked !== "boolean") return null;
+    const total = contribution + (bundleChecked && contribution < 10000 ? 590 : 0);
+    return Number.isSafeInteger(total) ? total : null;
+  }
+
+  const config = { prices, maxAmount, calculateTotal, calculateBundleTotal };
   if (typeof module !== "undefined" && module.exports) module.exports = config;
   else root.contributionAdditions = config;
 })(globalThis);

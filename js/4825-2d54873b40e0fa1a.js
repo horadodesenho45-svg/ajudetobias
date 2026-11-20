@@ -295,15 +295,8 @@
         ),
         s = (0, o.default)(i.wn).withConfig({ componentId: "sc-d9db48e2-1" })(
           [
-            "display:grid;grid-template-columns:repeat(3,1fr);row-gap:24px;column-gap:16px;@media ",
-            "{grid-template-columns:",
-            ";}> svg{margin:auto;}",
+            "display:grid;grid-template-columns:repeat(2,1fr);row-gap:24px;column-gap:16px;}> svg{margin:auto;}",
           ],
-          a.A.phone,
-          (e) => {
-            let { canShare: t } = e;
-            return t ? "repeat(4, 1fr)" : "repeat(3, 1fr)";
-          },
         ),
         c = (0, o.default)(r.Kz).withConfig({ componentId: "sc-d9db48e2-2" })([
           "display:block !important;",
@@ -926,7 +919,7 @@
             (l = h.createElement("rect", {
               width: 32,
               height: 32,
-              fill: "#24CA68",
+              fill: "#f45102",
               rx: 16,
             })),
           s ||
@@ -1171,7 +1164,7 @@
                             (0, p.jsx)(m.o5, {
                               fontFamily: k.f,
                               weight: 700,
-                              children: "Link da vaquinha:",
+                              children: "Link da contribuição:",
                             }),
                             (0, p.jsx)(M.A, {
                               url: n,
@@ -1192,7 +1185,7 @@
                           fontSizeMobile: 16,
                           weight: 700,
                           children:
-                            "Compartilhe tamb\xe9m nas redes sociais e alcance ainda mais doadores",
+                            "Compartilhe para divulgar o caso tobias",
                         }),
                         (0, p.jsx)(m.o5, {
                           fontFamily: k.f,
@@ -1211,26 +1204,9 @@
                       padding: [16, 0, 0],
                       children: [
                         (0, p.jsxs)(m.wn, {
-                          flex: !0,
-                          justifyContent: "center",
-                          flexDirection: "column",
-                          alignItems: "center",
-                          rowGap: 4,
-                          onClick: () => {
-                            (navigator.clipboard.writeText(j), d(), w());
-                          },
-                          cursor: "pointer",
-                          children: [
-                            (0, p.jsx)(V.A, {}),
-                            (0, p.jsx)(m.o5, {
-                              fontFamily: k.f,
-                              fontSize: 16,
-                              children: "Facebook",
-                            }),
-                          ],
-                        }),
-                        ea &&
-                          (0, p.jsxs)(m.wn, {
+                            as: "button",
+                            type: "button",
+                            style: { background: "none", border: 0 },
                             flex: !0,
                             justifyContent: "center",
                             flexDirection: "column",
@@ -1245,12 +1221,12 @@
                               (0, p.jsx)(m.o5, {
                                 fontFamily: k.f,
                                 fontSize: 16,
-                                children: "Story",
+                                children: "Instagram",
                               }),
                             ],
                           }),
                         (0, p.jsx)(S.v4, {
-                          url: i,
+                          url: n,
                           beforeOnClick: () => {
                             (en("WPP Share"),
                               eo("show-page-wpp-share"),
@@ -1273,141 +1249,9 @@
                             ],
                           }),
                         }),
-                        (0, p.jsx)(S.Q, {
-                          url: o,
-                          beforeOnClick: () => {
-                            (en("X Share"),
-                              eo("show-page-x-share"),
-                              (0, y.V)(c.id, "x", F));
-                          },
-                          title: j,
-                          children: (0, p.jsxs)(m.wn, {
-                            flex: !0,
-                            justifyContent: "center",
-                            flexDirection: "column",
-                            alignItems: "center",
-                            rowGap: 4,
-                            children: [
-                              (0, p.jsx)(O, {}),
-                              (0, p.jsx)(m.o5, {
-                                fontFamily: k.f,
-                                fontSize: 16,
-                                children: "X",
-                              }),
-                            ],
-                          }),
-                        }),
-                        (0, p.jsxs)(m.wn, {
-                          flex: !0,
-                          justifyContent: "center",
-                          flexDirection: "column",
-                          alignItems: "center",
-                          rowGap: 4,
-                          onClick: () => {
-                            (navigator.clipboard.writeText(j), f(), w());
-                          },
-                          children: [
-                            (0, p.jsx)(H, {}),
-                            (0, p.jsx)(m.o5, {
-                              fontFamily: k.f,
-                              fontSize: 16,
-                              children: "Messenger",
-                            }),
-                          ],
-                        }),
-                        ea &&
-                          (0, p.jsxs)(m.wn, {
-                            flex: !0,
-                            justifyContent: "center",
-                            flexDirection: "column",
-                            alignItems: "center",
-                            rowGap: 4,
-                            onClick: () => {
-                              (A(!1), T(!0));
-                            },
-                            cursor: "pointer",
-                            children: [
-                              (0, p.jsx)(L.A, {}),
-                              (0, p.jsx)(m.o5, {
-                                fontFamily: k.f,
-                                fontSize: 16,
-                                children: "Feed",
-                              }),
-                            ],
-                          }),
-                        (0, p.jsxs)(m.wn, {
-                          flex: !0,
-                          justifyContent: "center",
-                          flexDirection: "column",
-                          alignItems: "center",
-                          rowGap: 4,
-                          onClick: () => {
-                            (navigator.clipboard.writeText(j), g(), w());
-                          },
-                          cursor: "pointer",
-                          children: [
-                            (0, p.jsx)(B.A, {}),
-                            (0, p.jsx)(m.o5, {
-                              fontFamily: k.f,
-                              fontSize: 16,
-                              children: "LinkedIn",
-                            }),
-                          ],
-                        }),
-                        (0, p.jsx)(m.wn, {
-                          onClick: () => {
-                            (en("Email Share"),
-                              eo("show-page-email-share"),
-                              (0, y.V)(c.id, "email", F));
-                          },
-                          flex: !0,
-                          justifyContent: "center",
-                          children: (0, p.jsx)(b.Ot, {
-                            url: n,
-                            subject: s,
-                            body: j,
-                            children: (0, p.jsxs)(m.wn, {
-                              flex: !0,
-                              justifyContent: "center",
-                              flexDirection: "column",
-                              alignItems: "center",
-                              rowGap: 4,
-                              children: [
-                                (0, p.jsx)(I, {}),
-                                (0, p.jsx)(m.o5, {
-                                  fontFamily: k.f,
-                                  fontSize: 16,
-                                  children: "E-mail",
-                                }),
-                              ],
-                            }),
-                          }),
-                        }),
                       ],
                     }),
                   ],
-                }),
-                (0, p.jsx)(m.wn, {
-                  flex: !0,
-                  fluid: !0,
-                  flexDirection: "column",
-                  rowGap: 12,
-                  children:
-                    r &&
-                    W &&
-                    (0, p.jsx)(m.$n, {
-                      variant: "dark",
-                      onClick: el,
-                      block: !0,
-                      children: (0, p.jsx)(m.o5, {
-                        fontFamily: k.a,
-                        fontSize: 14,
-                        weight: 700,
-                        align: "center",
-                        color: "white",
-                        children: "Compartilhar",
-                      }),
-                    }),
                 }),
                 (0, p.jsx)(P.A, {
                   isMobile: r,
@@ -1415,54 +1259,34 @@
                   onClose: es,
                   children:
                     D &&
-                    (0, p.jsx)(N.A, {
-                      format: "story",
-                      user: t,
-                      campaign: c,
-                      app: v,
-                      title: s,
-                      isMobile: r,
-                      shareUrl: n,
-                      shareDescription: j,
-                      shareAssets: a,
-                      preparation: l,
-                      defaultBackgroundIndex: E,
-                      onShare: (e, t) => {
-                        (en("IG Story Share"),
-                          eo("show-page-ig-story-share", {
-                            template_id: e,
-                            has_assets: t,
-                          }),
-                          (0, y.V)(c.id, "instagram_story", F));
-                      },
-                    }),
-                }),
-                (0, p.jsx)(P.A, {
-                  isMobile: r,
-                  isOpen: G,
-                  onClose: ec,
-                  children:
-                    G &&
-                    (0, p.jsx)(N.A, {
-                      format: "post",
-                      user: t,
-                      campaign: c,
-                      app: v,
-                      title: s,
-                      isMobile: r,
-                      shareUrl: n,
-                      shareDescription: j,
-                      shareAssets: a,
-                      preparation: l,
-                      defaultBackgroundIndex: E,
-                      onShare: (e, t) => {
-                        (en("IG Feed Share"),
-                          eo("show-page-ig-feed-share", {
-                            template_id: e,
-                            has_assets: t,
-                          }),
-                          (0, y.V)(c.id, "instagram_feed", F));
-                      },
+                    (0, p.jsxs)(m.wn, {
+                      flex: !0,
+                      flexDirection: "column",
+                      rowGap: 16,
+                      padding: [24, 0],
+                      children: [
+                        (0, p.jsx)(m.o5, {
+                          fontFamily: k.a,
+                          fontSizeDesktop: 18,
+                          fontSizeMobile: 16,
+                          weight: 700,
+                          children: "Compartilhar no Instagram",
+                        }),
+                        (0, p.jsx)(m.o5, {
+                          fontFamily: k.f,
+                          children: "Copie o link e adicione-o ao seu story no Instagram.",
+                        }),
+                        (0, p.jsx)(M.A, {
+                          url: n,
+                          onCopied: () => (0, y.V)(c.id, "copy_link", F),
+                        }),
+                        (0, p.jsx)("a", {
+                          href: "https://www.instagram.com/",
+                          target: "_blank",
+                          rel: "noopener noreferrer",
+                          children: "Abrir Instagram",
+                        }),
+                      ],
                     }),
                 }),
               ],
@@ -1493,7 +1317,7 @@
             [A, O] = (0, h.useState)(!1),
             [z, M] = (0, h.useState)(!1),
             [G, I] = (0, h.useState)(!1),
-            V = (0, g.O)(n.id, i && "Vakinha" === a),
+            V = (0, g.O)(n.id, !1),
             B = (0, w.B)(n.id, V.cards),
             T = () => {
               let e = (0, x.vY)(),
@@ -1510,20 +1334,7 @@
                 t.toString() ? "?".concat(t) : ""
               );
             },
-            U = () =>
-              "Vakinha" === a
-                ? (() => {
-                    let e = window.location.href.split(/[?#]/)[0],
-                      t = T();
-                    return "".concat(e).concat(t);
-                  })()
-                : (() => {
-                    let e = ""
-                        .concat("https://vakinhadasorte.com.br", "/")
-                        .concat(v),
-                      t = T();
-                    return "".concat(e).concat(t);
-                  })();
+            U = () => window.location.href;
           (0, h.useEffect)(() => {
             new URLSearchParams(window.location.search).has("openModal") &&
               r(!0);

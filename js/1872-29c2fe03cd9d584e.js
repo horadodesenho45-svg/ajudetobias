@@ -501,7 +501,7 @@
                       B &&
                         (0, r.jsx)(I, {
                           children: (0, r.jsx)(j.A, {
-                            text: "Vaquinha Patrocinada",
+                            text: "Contribuição Patrocinada",
                           }),
                         }),
                     ],

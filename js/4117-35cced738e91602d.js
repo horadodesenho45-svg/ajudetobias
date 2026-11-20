@@ -26,12 +26,12 @@
                   gradientTransform: "matrix(0.853, 0, 0, -1, 0.003, 2)",
                   gradientUnits: "objectBoundingBox",
                   children: [
-                    (0, l.jsx)("stop", { offset: "0", stopColor: "#24ca68" }),
+                    (0, l.jsx)("stop", { offset: "0", stopColor: "#f45102" }),
                     (0, l.jsx)("stop", {
                       offset: "0.704",
-                      stopColor: "#0a8f51",
+                      stopColor: "#c43d00",
                     }),
-                    (0, l.jsx)("stop", { offset: "1", stopColor: "#007a48" }),
+                    (0, l.jsx)("stop", { offset: "1", stopColor: "#9e3100" }),
                   ],
                 }),
                 (0, l.jsx)("clipPath", {

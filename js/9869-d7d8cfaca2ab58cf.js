@@ -677,7 +677,7 @@
           ),
           a ||
             (a = o.createElement("path", {
-              fill: "#009D4E",
+              fill: "#c43d00",
               d: "M8 12v-2h8v2zm0-4V6h8v2zm-2 6h7.5q.724 0 1.35.313.626.312 1.05.887l2.1 2.75V4H6zm0 6h11.05l-2.725-3.575q-.15-.2-.362-.312A1 1 0 0 0 13.5 16H6zm12 2H6q-.824 0-1.412-.587A1.93 1.93 0 0 1 4 20V4q0-.824.588-1.412A1.93 1.93 0 0 1 6 2h12q.824 0 1.413.587Q20 3.176 20 4v16q0 .824-.587 1.413A1.93 1.93 0 0 1 18 22",
             })),
         );
@@ -837,7 +837,7 @@
           ),
           a ||
             (a = z.createElement("path", {
-              fill: "#025432",
+              fill: "#742400",
               fillRule: "evenodd",
               d: "M13.602 2.806a1.063 1.063 0 0 0-2.071-.48l-.306 1.312a1.063 1.063 0 0 0 2.071.481zM9.669 4.358a1.26 1.26 0 0 0-1.079.425l-.005.009-6.676 7.787h-.002a1.69 1.69 0 0 0-.175 1.948l.45.778c.356.628 1.07.962 1.779.83h.002l.119-.022q.101.26.24.502a3.65 3.65 0 0 0 6.843-1.834l2.875-.54h.009a1.267 1.267 0 0 0 .843-1.89l-4.25-7.361a1.27 1.27 0 0 0-.973-.629V4.36m-3.862 11.43 3.644-.684a1.95 1.95 0 0 1-3.644.686zm12.665-5.16a1.06 1.06 0 0 1-1.275.795l-1.312-.306a1.062 1.062 0 0 1 .48-2.069l1.313.306c.572.132.928.703.796 1.276h-.002zM17.184 6.37a1.063 1.063 0 1 0-1.121-1.802l-1.146.712a1.063 1.063 0 1 0 1.121 1.803z",
               clipRule: "evenodd",
@@ -1045,7 +1045,7 @@
                       variant: "pendingValidation",
                       palette: "yellow",
                       iconKey: "alertCircle",
-                      text: "Para liberarmos a divulga\xe7\xe3o da sua vaquinha, precisamos <strong>validar seus dados</strong>. Envie uma <strong>foto do seu rosto</strong> em <strong>at\xe9 48 horas.</strong>",
+                      text: "Para liberarmos a divulga\xe7\xe3o da sua contribuição, precisamos <strong>validar seus dados</strong>. Envie uma <strong>foto do seu rosto</strong> em <strong>at\xe9 48 horas.</strong>",
                       ctaLabel: "Enviar foto",
                       ctaRoute: "identityVerification",
                       ctaParams: { meta_spotlight_id: c.id },
@@ -1087,7 +1087,7 @@
                       variant: "running",
                       palette: "green",
                       iconKey: "megaphoneGreen",
-                      text: "<strong>J\xe1 come\xe7amos a divulgar sua vaquinha para novas pessoas.</strong> Acompanhe o desempenho na tela de estat\xedsticas.",
+                      text: "<strong>J\xe1 come\xe7amos a divulgar sua contribuição para novas pessoas.</strong> Acompanhe o desempenho na tela de estat\xedsticas.",
                       ctaLabel: "Ver estat\xedsticas",
                       ctaRoute: "statistics",
                       ctaParams: { slug: n },
@@ -1112,7 +1112,7 @@
                           variant: "repurchase",
                           palette: "orange",
                           iconKey: "megaphoneOrange",
-                          text: "<strong>Seu pacote chegou ao fim.</strong> Ative novamente o Vakinha An\xfancios para continuar levando sua vaquinha a novas pessoas.",
+                          text: "<strong>Seu pacote chegou ao fim.</strong> Ative novamente o Vakinha An\xfancios para continuar levando sua contribuição a novas pessoas.",
                           ctaLabel: "Quero mais divulga\xe7\xe3o",
                           ctaRoute: "spotlightPreCheckout",
                           ctaParams: { campaignId: t },

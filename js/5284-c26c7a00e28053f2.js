@@ -443,8 +443,8 @@
             D = null != (n = null == W ? void 0 : W.products) ? n : [],
             L = null == (t = D[0]) ? void 0 : t.slug,
             P = _
-              ? "Cora\xe7\xf5es para destacar sua vaquinha."
-              : "Cora\xe7\xf5es para destacar esta vaquinha.",
+              ? "Cora\xe7\xf5es para destacar sua contribuição."
+              : "Cora\xe7\xf5es para destacar esta contribuição.",
             G = [...D].reverse().map((e) => ({ ...e, description: P })),
             J = ((e) => {
               let t = e
@@ -653,10 +653,10 @@
                           align: "center",
                           weight: 700,
                           children: _
-                            ? "Destaque sua vaquinha"
+                            ? "Destaque sua contribuição"
                             : E
                               ? "D\xea cora\xe7\xf5es para ".concat(E)
-                              : "D\xea cora\xe7\xf5es para esta vaquinha",
+                              : "D\xea cora\xe7\xf5es para esta contribuição",
                         }),
                       }),
                       (0, a.jsx)(x.o5, {
@@ -664,7 +664,7 @@
                         fontSize: 16,
                         align: "center",
                         children: "Cora\xe7\xf5es levam ".concat(
-                          _ ? "sua vaquinha" : "a vaquinha",
+                          _ ? "sua contribuição" : "a contribuição",
                           " para a lista das Mais Amadas, onde mais pessoas podem conhec\xea-la e apoiar.",
                         ),
                       }),
@@ -677,7 +677,7 @@
                             align: "center",
                             color: "gray400",
                             children: [
-                              _ ? "Sua vaquinha" : "Esta vaquinha",
+                              _ ? "Sua contribuição" : "Esta contribuição",
                               " j\xe1 recebeu ",
                               (0, a.jsx)("strong", {
                                 children: ""
@@ -687,6 +687,46 @@
                             ],
                           }),
                         }),
+                    ],
+                  }),
+                "noStickers" === I &&
+                  W &&
+                  !G.length &&
+                  (0, a.jsxs)(x.wn, {
+                    padding: [16, 0, 24],
+                    flex: !0,
+                    flexDirection: "column",
+                    alignItems: "center",
+                    rowGap: 8,
+                    children: [
+                      (0, a.jsx)(x.o5, {
+                        fontFamily: w.f,
+                        fontSize: 14,
+                        align: "center",
+                        color: "gray400",
+                        children:
+                          "N\xe3o foi poss\xedvel carregar os pacotes agora.",
+                      }),
+                      (0, a.jsx)(p(), {
+                        href: {
+                          pathname: "/loja/[slug]",
+                          query: {
+                            slug: "adesivo-digital",
+                            utm_internal_source: "sticker-modal",
+                          },
+                        },
+                        passHref: !0,
+                        onClick: K,
+                        children: (0, a.jsx)(x.o5, {
+                          fontFamily: w.f,
+                          fontSize: 14,
+                          align: "center",
+                          weight: 700,
+                          color: "gray400",
+                          textDecoration: "underline",
+                          children: "Ver pacotes de cora\xe7\xf5es",
+                        }),
+                      }),
                     ],
                   }),
                 "noStickers" === I &&
@@ -753,7 +793,7 @@
                           fontSize: 16,
                           align: "center",
                           children: [
-                            "Pronto, voc\xea destacou a vaquinha com ",
+                            "Pronto, voc\xea destacou a contribuição com ",
                             (0, a.jsxs)("strong", {
                               children: [R, " cora\xe7\xf5es!"],
                             }),
@@ -918,12 +958,12 @@
         },
         c = {
           campaign_creation: [
-            "15-coracoes-suporte-premium-cashback-criacao-vaquinha",
-            "15-coracoes-criacao-vaquinha",
+            "15-coracoes-suporte-premium-cashback-criacao-contribuição",
+            "15-coracoes-criacao-contribuição",
           ],
           showOffer: [
-            "15-coracoes-criacao-vaquinha",
-            "15-coracoes-suporte-premium-cashback-criacao-vaquinha",
+            "15-coracoes-criacao-contribuição",
+            "15-coracoes-suporte-premium-cashback-criacao-contribuição",
             "vakinha-anuncios",
           ],
           individual_sticker_offer: ["new-individual-sticker"],
@@ -1179,12 +1219,12 @@
                   gradientTransform: "matrix(12.5657 0 0 12.2752 8.462 1.734)",
                   gradientUnits: "userSpaceOnUse",
                 },
-                g.createElement("stop", { stopColor: "#24CA68" }),
+                g.createElement("stop", { stopColor: "#f45102" }),
                 g.createElement("stop", {
                   offset: 0.704,
-                  stopColor: "#0A8F51",
+                  stopColor: "#c43d00",
                 }),
-                g.createElement("stop", { offset: 1, stopColor: "#007A48" }),
+                g.createElement("stop", { offset: 1, stopColor: "#9e3100" }),
               ),
             )),
         );

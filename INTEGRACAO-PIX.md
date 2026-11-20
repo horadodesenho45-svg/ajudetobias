@@ -1,18 +1,18 @@
-# Integração Pix Paradise
+# Integração Pix Horizon
 
 O site e a função `api/pix.js` devem ser publicados juntos na Vercel. GitHub Pages sozinho não executa a função de servidor.
 
-1. Importe este repositório na Vercel como projeto sem framework e publique-o.
-2. Em **Settings > Environment Variables**, crie `PARADISE_API_KEY` com a chave secreta da loja obtida no painel Paradise, para os ambientes desejados. Não coloque a chave nos arquivos, no Git ou no navegador.
-3. Faça um novo deploy após configurar a variável. A documentação da Paradise informa o endpoint `https://oferta-processamento.org.ua/api/v1/transaction`; confirme-o com a Paradise antes de usar em produção.
-4. Abra o endereço HTTPS da Vercel e faça um teste controlado com a conta Paradise, conferindo valor, recebedor e rastreamento no painel antes de divulgar o site.
+1. Importe este repositório na Vercel como projeto sem framework.
+2. Na Horizon, conclua a verificação KYC e crie uma chave em **Configurações > Chaves de API**.
+3. Na Vercel, em **Settings > Environment Variables**, configure `HORIZON_API_KEY` com a chave secreta para os ambientes desejados. Não coloque a chave nos arquivos, no Git ou no navegador.
+4. Faça um novo deploy. Teste pelo endereço HTTPS da Vercel com a conta Horizon e confira valor, recebedor, descrição e rastreamento no painel antes de divulgar o site.
 
-A função envia o `productHash` fixo `prod_bb8e0ec1c581d0ca`, nome, CPF, telefone, e-mail e valor em centavos. Os parâmetros `utm_source`, `utm_medium`, `utm_campaign`, `utm_content`, `utm_term`, `src`, `sck`, `fbclid` e `gclid` presentes na URL são enviados no objeto `tracking`; `src` e `sck` podem conter identificadores de anúncio fornecidos na URL. A documentação consultada não lista `fbclid` nem `gclid`: confirme com a Paradise se esses campos são aceitos e utilizados. A mensagem opcional não é salva nem enviada.
+A função cria transações em `https://app.horizonpags.com/api/v1/transactions`, enviando nome, CPF, telefone, e-mail e valor em centavos. A descrição é `Ebook Menino Tobias`, com indicação de Turbine quando selecionado. Como os valores são variáveis, não é enviado `productId`: a documentação da Horizon informa que o preço e o nome de um produto associado vêm do cadastro. Confira no painel se a descrição atende à identificação desejada; ela não equivale à associação a um produto cadastrado.
 
-O doador pode escolher vários adicionais. A função calcula os preços fixos em centavos e rejeita qualquer Pix acima de R$ 350,00. Os identificadores escolhidos são enviados na descrição da transação para possibilitar sua identificação no painel Paradise; confirme na conta se a descrição fica disponível para a equipe. A integração não registra automaticamente a entrega dos itens nem altera o destaque da campanha ou uma contagem de corações. A ONG deve fazer esse acompanhamento após confirmar cada pagamento.
+Os parâmetros `utm_source`, `utm_medium`, `utm_campaign`, `utm_content` e `utm_term` são enviados como `utm.source`, `utm.medium`, `utm.campaign`, `utm.content` e `utm.term`. `src` e `sck` também são enviados no objeto `utm`. A documentação da Horizon não lista `fbclid` e `gclid`, por isso não são enviados. A mensagem opcional não é salva nem enviada.
 
-O campo de valor é formatado com duas casas decimais ao sair dele. O botão Contribuir é habilitado quando os campos obrigatórios estão válidos; CPF e telefone são formatados durante a digitação. Se a Paradise não retornar a imagem do QR Code, o código Pix copia e cola continua disponível e a página informa a ausência da imagem.
+O formulário aceita contribuições de R$ 7,90 a R$ 350,00. A função aceita um total de R$ 1,00 a R$ 350,00 e calcula a opção Turbine: R$ 5,90 para contribuições abaixo de R$ 100,00, sem acréscimo a partir desse valor. A integração não registra automaticamente a entrega dos itens nem altera o destaque da campanha ou uma contagem de corações. Esses acompanhamentos devem ser feitos após a confirmação de cada pagamento.
 
-O código Pix gerado não confirma que o pagamento foi realizado. Esta integração não implementa webhook, confirmação automática, atualização da meta ou publicação de doadores. Consulte o painel Paradise para verificar os pagamentos. Em caso de erro ou interrupção, confira o painel antes de gerar outro Pix: a API documentada não garante idempotência e a tentativa anterior pode ter criado uma cobrança. Configure no provedor controles de acesso, monitoramento e proteção contra abuso adequados antes de operar em produção; não registre dados pessoais ou a chave nos logs.
+O código Pix gerado não confirma o pagamento. A integração não implementa webhook, confirmação automática, atualização da meta ou publicação de doadores; consulte o painel Horizon. Cada solicitação ao gateway recebe uma chave de idempotência, mas uma nova tentativa no site cria outra chave: em caso de erro ou interrupção, confira o painel antes de gerar outro Pix. Configure controles de acesso, monitoramento e proteção contra abuso adequados; não registre dados pessoais ou a chave nos logs.
 
-Para executar os testes locais da função com respostas simuladas: `node --test tests\pix.test.js`. Esses testes não verificam uma transação real na Paradise.
+Para executar os testes locais com respostas simuladas: `node --test tests\pix.test.js`. Os testes não realizam uma transação real na Horizon.
