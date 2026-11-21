@@ -1,0 +1,835 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta
+      name="description"
+      content="Obrigado por ajudar a divulgar o caso do Tobias. Conheça opções para ampliar ainda mais o alcance da campanha."
+    />
+    <title>Obrigado por divulgar o caso do Tobias</title>
+    <link rel="icon" href="images/logoaa.jpg" type="image/jpeg" />
+    <style>
+      :root {
+        color-scheme: light;
+        font-family: Arial, Helvetica, sans-serif;
+        color: #282828;
+        background: #fff8f4;
+        font-synthesis: none;
+        text-rendering: optimizeLegibility;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        min-width: 320px;
+        min-height: 100vh;
+        margin: 0;
+        background:
+          radial-gradient(ellipse at 50% 0, #ffe5d6 0, transparent 34rem),
+          #fff8f4;
+      }
+
+      a {
+        color: inherit;
+      }
+
+      .site-header {
+        padding: 18px 24px;
+        border-bottom: 1px solid #f1e4dc;
+        background: rgb(255 255 255 / 90%);
+      }
+
+      .brand {
+        display: flex;
+        width: min(100%, 1080px);
+        align-items: center;
+        gap: 10px;
+        margin: 0 auto;
+        color: #742400;
+        font-size: 1.1rem;
+        font-weight: 800;
+        text-decoration: none;
+      }
+
+      .brand img {
+        width: 38px;
+        height: 38px;
+        border-radius: 50%;
+        object-fit: cover;
+      }
+
+      main {
+        width: min(100% - 32px, 920px);
+        margin: 48px auto;
+      }
+
+      .thank-you-card {
+        overflow: hidden;
+        border: 1px solid #f1e4dc;
+        border-radius: 24px;
+        background: #fff;
+        box-shadow: 0 18px 55px rgb(116 36 0 / 9%);
+      }
+
+      .thank-you-intro {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) minmax(240px, 0.8fr);
+        align-items: center;
+        gap: 36px;
+        padding: 40px;
+      }
+
+      .eyebrow {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        margin: 0 0 16px;
+        color: #a1380b;
+        font-size: 0.85rem;
+        font-weight: 800;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+      }
+
+      .check {
+        display: inline-grid;
+        width: 24px;
+        height: 24px;
+        place-items: center;
+        border-radius: 50%;
+        background: #e8f5e9;
+        color: #28743a;
+        font-size: 0.9rem;
+        letter-spacing: 0;
+      }
+
+      h1,
+      h2,
+      h3,
+      p {
+        margin-top: 0;
+      }
+
+      h1 {
+        max-width: 540px;
+        margin-bottom: 14px;
+        color: #742400;
+        font-size: clamp(2rem, 5vw, 3.15rem);
+        letter-spacing: -0.045em;
+        line-height: 1.08;
+      }
+
+      .intro-copy {
+        max-width: 520px;
+        margin-bottom: 0;
+        color: #5a5a5a;
+        font-size: 1.08rem;
+        line-height: 1.65;
+      }
+
+      .tobias-image {
+        display: block;
+        width: 100%;
+        min-height: 250px;
+        max-height: 320px;
+        border-radius: 18px;
+        object-fit: cover;
+        object-position: center;
+      }
+
+      .upsell {
+        padding: 36px 40px 40px;
+        border-top: 1px solid #f1e4dc;
+        background: #fffcfa;
+      }
+
+      .upsell-heading {
+        max-width: 650px;
+        margin: 0 auto 26px;
+        text-align: center;
+      }
+
+      .upsell-heading h2 {
+        margin-bottom: 10px;
+        color: #742400;
+        font-size: clamp(1.55rem, 4vw, 2rem);
+        letter-spacing: -0.025em;
+      }
+
+      .upsell-heading p {
+        margin-bottom: 0;
+        color: #626262;
+        line-height: 1.6;
+      }
+
+      .offers {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+        gap: 18px;
+      }
+
+      .offer {
+        display: flex;
+        min-height: 235px;
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 24px;
+        border: 1px solid #f0d7c8;
+        border-radius: 18px;
+        background: #fff;
+      }
+
+      .offer-label {
+        display: inline-block;
+        margin-bottom: 14px;
+        padding: 6px 10px;
+        border-radius: 999px;
+        background: #fff0e8;
+        color: #a1380b;
+        font-size: 0.75rem;
+        font-weight: 800;
+        letter-spacing: 0.04em;
+        text-transform: uppercase;
+      }
+
+      .offer h3 {
+        margin-bottom: 8px;
+        color: #742400;
+        font-size: 1.4rem;
+      }
+
+      .reach {
+        margin-bottom: 20px;
+        color: #5a5a5a;
+        line-height: 1.5;
+      }
+
+      .reach strong {
+        color: #c43d00;
+      }
+
+      .offer button,
+      .custom-offer button {
+        width: 100%;
+        min-height: 48px;
+        margin-top: auto;
+        border: 0;
+        border-radius: 10px;
+        background: #c43d00;
+        color: #fff;
+        cursor: pointer;
+        font: inherit;
+        font-weight: 800;
+      }
+
+      .offer button:disabled,
+      .custom-offer button:disabled {
+        background: #e9e3df;
+        color: #655b55;
+        cursor: not-allowed;
+      }
+
+      .custom-offer {
+        margin-top: 18px;
+        padding: 24px;
+        border: 1px solid #f0d7c8;
+        border-radius: 18px;
+        background: #fff;
+      }
+
+      .custom-offer h3 {
+        margin-bottom: 8px;
+        color: #742400;
+        font-size: 1.3rem;
+      }
+
+      .custom-offer > p {
+        margin-bottom: 18px;
+        color: #5a5a5a;
+        line-height: 1.5;
+      }
+
+      .custom-offer label {
+        display: block;
+        margin-bottom: 8px;
+        font-weight: 700;
+      }
+
+      .custom-offer input,
+      .custom-offer textarea {
+        width: 100%;
+        min-height: 48px;
+        padding: 10px 12px;
+        border: 1px solid #c9b8ae;
+        border-radius: 9px;
+        color: #282828;
+        font: inherit;
+      }
+
+      .custom-offer input:focus-visible {
+        border-color: #c43d00;
+        outline: 3px solid rgb(196 61 0 / 20%);
+      }
+
+      .custom-offer input[aria-invalid="true"] {
+        border: 2px solid #bc2026;
+        background: #fffafa;
+      }
+
+      .customer-fields {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 16px;
+        margin: 20px 0;
+      }
+
+      .customer-fields[hidden],
+      .summary-values[hidden] {
+        display: none;
+      }
+
+      .customer-reused {
+        margin: 20px 0;
+        color: #5a5a5a;
+        line-height: 1.5;
+      }
+
+      .custom-offer .edit-customer {
+        width: auto;
+        min-height: 0;
+        padding: 4px 0;
+        background: transparent;
+        color: #a1380b;
+        text-decoration: underline;
+      }
+
+      .pix-result {
+        margin-top: 20px;
+        padding: 20px;
+        border: 1px solid #f0d7c8;
+        border-radius: 12px;
+        overflow-wrap: anywhere;
+      }
+
+      .pix-result img {
+        display: block;
+        max-width: min(100%, 240px);
+        margin: 12px auto;
+      }
+
+      .pix-result img[hidden] {
+        display: none;
+      }
+
+      .pix-result textarea {
+        margin-bottom: 12px;
+        resize: vertical;
+      }
+
+      .pix-status {
+        margin: 12px 0 0;
+        line-height: 1.5;
+      }
+
+      .custom-summary {
+        margin: 12px 0 18px;
+        color: #742400;
+        font-weight: 700;
+        line-height: 1.5;
+      }
+
+      .summary-error {
+        margin: 0;
+        padding: 14px 16px;
+        border: 2px solid #bc2026;
+        border-radius: 12px;
+        background: #fff0ef;
+        color: #971b20;
+        font-size: 1rem;
+        font-weight: 800;
+      }
+
+      .summary-values {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(145px, 1fr));
+        gap: 10px;
+      }
+
+      .summary-value {
+        padding: 16px;
+        border: 1px solid #f4cbb4;
+        border-radius: 12px;
+        background: #fff3ec;
+      }
+
+      .summary-value span,
+      .summary-value strong {
+        display: block;
+      }
+
+      .summary-value span {
+        color: #6e5143;
+        font-size: 0.83rem;
+      }
+
+      .summary-value strong {
+        margin-top: 5px;
+        color: #a83200;
+        font-size: 1.35rem;
+        overflow-wrap: anywhere;
+      }
+
+      .estimate-note {
+        margin: 18px 0 0;
+        color: #777;
+        font-size: 0.85rem;
+        line-height: 1.5;
+        text-align: center;
+      }
+
+      .return-link {
+        display: block;
+        width: fit-content;
+        margin: 28px auto 0;
+        padding: 12px 20px;
+        border: 2px solid #c43d00;
+        border-radius: 10px;
+        color: #a1380b;
+        font-weight: 800;
+        text-align: center;
+        text-decoration: none;
+        transition: background-color 160ms ease, color 160ms ease;
+      }
+
+      .return-link:hover {
+        background: #c43d00;
+        color: #fff;
+      }
+
+      .return-link:focus-visible,
+      .brand:focus-visible {
+        outline: 3px solid #742400;
+        outline-offset: 4px;
+      }
+
+      footer {
+        padding: 0 20px 32px;
+        color: #777;
+        font-size: 0.9rem;
+        text-align: center;
+      }
+
+      @media (max-width: 680px) {
+        .site-header {
+          padding: 14px 18px;
+        }
+
+        main {
+          width: min(100% - 24px, 520px);
+          margin: 24px auto 36px;
+        }
+
+        .thank-you-intro {
+          grid-template-columns: 1fr;
+          gap: 24px;
+          padding: 28px 22px;
+        }
+
+        .tobias-image {
+          min-height: 190px;
+          max-height: 240px;
+        }
+
+        .upsell {
+          padding: 28px 20px;
+        }
+
+        .offers {
+          grid-template-columns: 1fr;
+        }
+
+        .offer {
+          min-height: 0;
+        }
+
+        .custom-offer {
+          padding: 20px;
+        }
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        *,
+        *::before,
+        *::after {
+          scroll-behavior: auto !important;
+          transition-duration: 0.01ms !important;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header class="site-header">
+      <a class="brand" href="index.html" aria-label="Divulgue — página inicial">
+        <img src="images/logoaa.jpg" alt="" />
+        <span>Divulgue</span>
+      </a>
+    </header>
+
+    <main>
+      <article class="thank-you-card">
+        <section class="thank-you-intro" aria-labelledby="page-title">
+          <div>
+            <p class="eyebrow"><span class="check" aria-hidden="true">✓</span> Obrigado por compartilhar</p>
+            <h1 id="page-title">Você ajudou a história do Tobias a chegar mais longe.</h1>
+            <p class="intro-copy">
+              Cada compartilhamento ajuda mais pessoas a conhecerem o caso do Tobias.
+              Obrigado por fazer parte dessa corrente de carinho e divulgação!
+            </p>
+          </div>
+          <img
+            class="tobias-image"
+            src="images/18647470-8B9A-47F5-B164-B3F94A402473.jpg"
+            alt="Tobias"
+            fetchpriority="high"
+          />
+        </section>
+
+        <section class="upsell" aria-labelledby="upsell-title">
+          <div class="upsell-heading">
+            <h2 id="upsell-title">Quer ampliar ainda mais a divulgação?</h2>
+            <p>
+              Cada coração custa <strong>R$ 1,90</strong> e pode ajudar cerca de
+              200 pessoas a conhecerem o caso do Tobias.
+            </p>
+          </div>
+
+          <div class="offers">
+            <article class="offer">
+              <span class="offer-label">Mais alcance</span>
+              <h3>5x <span aria-hidden="true">❤️</span> corações</h3>
+              <p class="reach"><strong>R$ 9,50</strong> · aprox. +1.000 pessoas vão conhecer o caso.</p>
+              <button type="button" class="select-offer" data-quantity="5" disabled>Selecionar 5 corações</button>
+            </article>
+
+            <article class="offer">
+              <span class="offer-label">Alcance ampliado</span>
+              <h3>10x <span aria-hidden="true">❤️</span> corações</h3>
+              <p class="reach"><strong>R$ 19,00</strong> · aprox. +2.000 pessoas vão conhecer o caso.</p>
+              <button type="button" class="select-offer" data-quantity="10" disabled>Selecionar 10 corações</button>
+            </article>
+
+            <article class="offer">
+              <span class="offer-label">Alcance ainda maior</span>
+              <h3>15x <span aria-hidden="true">❤️</span> corações</h3>
+              <p class="reach"><strong>R$ 28,50</strong> · aprox. +3.000 pessoas vão conhecer o caso.</p>
+              <button type="button" class="select-offer" data-quantity="15" disabled>Selecionar 15 corações</button>
+            </article>
+
+            <article class="offer">
+              <span class="offer-label">Grande ampliação</span>
+              <h3>25x <span aria-hidden="true">❤️</span> corações</h3>
+              <p class="reach"><strong>R$ 47,50</strong> · aprox. +5.000 pessoas vão conhecer o caso.</p>
+              <button type="button" class="select-offer" data-quantity="25" disabled>Selecionar 25 corações</button>
+            </article>
+
+            <article class="offer">
+              <span class="offer-label">Superampliação</span>
+              <h3>50x <span aria-hidden="true">❤️</span> corações</h3>
+              <p class="reach"><strong>R$ 95,00</strong> · aprox. +10.000 pessoas vão conhecer o caso.</p>
+              <button type="button" class="select-offer" data-quantity="50" disabled>Selecionar 50 corações</button>
+            </article>
+          </div>
+
+          <form id="heart-form" class="custom-offer" action="/api/pix" method="post" aria-labelledby="custom-offer-title">
+            <h3 id="custom-offer-title">Escolha outra quantidade</h3>
+            <p>Selecione um pacote acima ou informe quantos corações deseja. O total e o alcance estimado serão calculados na hora.</p>
+            <label for="heart-quantity">Quantidade de corações</label>
+            <input
+              id="heart-quantity"
+              type="number"
+              min="5"
+              max="178"
+              step="1"
+              required
+              inputmode="numeric"
+              aria-describedby="custom-price-note custom-summary"
+              placeholder="Ex.: 20"
+            />
+            <p id="custom-price-note" class="estimate-note">R$ 1,90 por coração · mínimo de 5 e máximo de 178 corações (R$ 338,20) · cerca de 200 pessoas alcançadas por coração.</p>
+            <div id="custom-summary" class="custom-summary" aria-live="polite">
+              <p id="summary-message">Digite uma quantidade inteira para ver o total e o alcance estimado.</p>
+              <div id="summary-values" class="summary-values" hidden>
+                <div class="summary-value"><span>Quantidade</span><strong id="summary-quantity"></strong></div>
+                <div class="summary-value"><span>Valor total</span><strong id="summary-total"></strong></div>
+                <div class="summary-value"><span>Alcance estimado</span><strong id="summary-reach"></strong></div>
+              </div>
+            </div>
+            <div id="customer-reused" class="customer-reused" hidden>
+              Usaremos os dados da contribuição anterior, guardados nesta aba.
+              <button type="button" class="edit-customer" id="edit-customer">Alterar dados</button>
+            </div>
+            <div id="customer-fields" class="customer-fields">
+              <div>
+                <label for="name">Nome completo</label>
+                <input id="name" name="name" type="text" minlength="3" maxlength="150" autocomplete="name" required />
+              </div>
+              <div>
+                <label for="payerDocument">CPF</label>
+                <input id="payerDocument" name="payerDocument" type="text" inputmode="numeric" autocomplete="off" required />
+              </div>
+              <div>
+                <label for="payerPhone">Telefone com DDD</label>
+                <input id="payerPhone" name="payerPhone" type="tel" autocomplete="tel" required />
+              </div>
+              <div>
+                <label for="email">E-mail</label>
+                <input id="email" name="email" type="email" maxlength="254" autocomplete="email" required />
+              </div>
+            </div>
+            <p>Seu apoio financia a divulgação da campanha do Tobias, sem repasse direto à família.</p>
+            <button type="submit" id="heart-submit" disabled>Gerar Pix</button>
+            <p id="pix-status" class="pix-status" role="status" aria-live="polite"></p>
+            <section id="pix-result" class="pix-result" hidden aria-labelledby="pix-title">
+              <h3 id="pix-title">Pague com Pix</h3>
+              <p id="pix-result-amount"></p>
+              <p>Escaneie o QR Code, quando disponível, ou copie o código no aplicativo do seu banco. A geração do código não confirma o pagamento.</p>
+              <img id="pix-qr" alt="QR Code Pix" hidden />
+              <label for="pix-code">Pix copia e cola</label>
+              <textarea id="pix-code" readonly rows="4"></textarea>
+              <button type="button" id="pix-copy">Copiar código Pix</button>
+              <p id="pix-copy-status" role="status"></p>
+            </section>
+          </form>
+
+          <p class="estimate-note">
+            As estimativas de alcance são aproximadas e podem variar.
+          </p>
+
+          <a class="return-link" href="index.html">Voltar para a campanha</a>
+        </section>
+      </article>
+    </main>
+
+    <footer>Com carinho, Gestos de Bondade</footer>
+    <script src="js/validacao-contribuicao.js"></script>
+    <script src="js/mascaras-contribuicao.js"></script>
+    <script src="js/dados-sessao.js"></script>
+    <script>
+      const form = document.getElementById("heart-form");
+      const heartQuantity = document.getElementById("heart-quantity");
+      const summaryMessage = document.getElementById("summary-message");
+      const summaryValues = document.getElementById("summary-values");
+      const summaryQuantity = document.getElementById("summary-quantity");
+      const summaryTotal = document.getElementById("summary-total");
+      const summaryReach = document.getElementById("summary-reach");
+      const numberFormat = new Intl.NumberFormat("pt-BR");
+      const moneyFormat = new Intl.NumberFormat("pt-BR", { style: "currency", currency: "BRL" });
+      const offers = Array.from(document.querySelectorAll(".select-offer"));
+      const submit = document.getElementById("heart-submit");
+      const status = document.getElementById("pix-status");
+      const result = document.getElementById("pix-result");
+      const resultAmount = document.getElementById("pix-result-amount");
+      const qr = document.getElementById("pix-qr");
+      const code = document.getElementById("pix-code");
+      const copy = document.getElementById("pix-copy");
+      const copyStatus = document.getElementById("pix-copy-status");
+      const name = document.getElementById("name");
+      const cpf = document.getElementById("payerDocument");
+      const phone = document.getElementById("payerPhone");
+      const email = document.getElementById("email");
+      const customerFields = document.getElementById("customer-fields");
+      const customerReused = document.getElementById("customer-reused");
+      const editCustomer = document.getElementById("edit-customer");
+      const trackingKeys = ["utm_source", "utm_medium", "utm_campaign", "utm_content", "utm_term", "src", "sck"];
+
+      function showQuantityError() {
+        summaryValues.hidden = true;
+        summaryMessage.hidden = false;
+        summaryMessage.classList.add("summary-error");
+        summaryMessage.textContent = "⚠️ Atenção: escolha entre 5 e 178 corações.";
+        heartQuantity.setAttribute("aria-invalid", "true");
+      }
+
+      function updateQuantity() {
+        const quantity = Number(heartQuantity.value);
+        if (!heartQuantity.value) {
+          if (heartQuantity.validity.badInput) {
+            showQuantityError();
+            return;
+          }
+          summaryValues.hidden = true;
+          summaryMessage.hidden = false;
+          summaryMessage.classList.remove("summary-error");
+          summaryMessage.textContent = "Digite uma quantidade inteira para ver o total e o alcance estimado.";
+          heartQuantity.removeAttribute("aria-invalid");
+          return;
+        }
+
+        if (
+          !Number.isSafeInteger(quantity) ||
+          quantity < 5 ||
+          quantity > 178
+        ) {
+          showQuantityError();
+          return;
+        }
+
+        summaryMessage.classList.remove("summary-error");
+        heartQuantity.removeAttribute("aria-invalid");
+        summaryQuantity.textContent = `${numberFormat.format(quantity)} ❤️`;
+        summaryTotal.textContent = moneyFormat.format(quantity * 190 / 100);
+        summaryReach.textContent = `+${numberFormat.format(quantity * 200)} pessoas`;
+        summaryMessage.hidden = true;
+        summaryValues.hidden = false;
+      }
+
+      if (window.contributionValidation && window.pixCustomerSession) {
+        try {
+          const customer = window.pixCustomerSession.load();
+          if (customer && typeof customer.name === "string" && customer.name.trim().length >= 3 &&
+              customer.name.length <= 150 && typeof customer.email === "string" &&
+              customer.email.length <= 254 && /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(customer.email) &&
+              typeof customer.document === "string" && window.contributionValidation.validCpf(customer.document) &&
+              typeof customer.phone === "string" && /^\d{10,11}$/.test(customer.phone)) {
+            name.value = customer.name;
+            email.value = customer.email;
+            cpf.value = customer.document;
+            phone.value = customer.phone;
+            customerFields.hidden = true;
+            customerReused.hidden = false;
+          } else if (customer) {
+            window.pixCustomerSession.clear();
+            status.textContent = "Os dados salvos não são válidos. Preencha seus dados para continuar.";
+          }
+        } catch {
+          status.textContent = "Não foi possível recuperar os dados desta aba. Preencha seus dados para continuar.";
+        }
+      } else {
+        status.textContent = "Não foi possível carregar os dados desta aba. Preencha seus dados para continuar.";
+      }
+
+      editCustomer.addEventListener("click", () => {
+        customerFields.hidden = false;
+        customerReused.hidden = true;
+        try {
+          window.pixCustomerSession.clear();
+        } catch {
+          status.textContent = "Não foi possível remover os dados temporários desta aba.";
+        }
+        name.focus();
+      });
+
+      heartQuantity.addEventListener("input", updateQuantity);
+      heartQuantity.addEventListener("invalid", showQuantityError);
+      form.addEventListener("input", () => {
+        if (!result.hidden) {
+          result.hidden = true;
+          status.textContent = "Os dados foram alterados. Gere outro Pix para a nova compra.";
+        }
+      });
+
+      offers.forEach((offer) => {
+        offer.disabled = false;
+        offer.addEventListener("click", () => {
+          heartQuantity.value = offer.dataset.quantity;
+          heartQuantity.dispatchEvent(new Event("input", { bubbles: true }));
+          heartQuantity.focus();
+        });
+      });
+
+      form.addEventListener("submit", async (event) => {
+        event.preventDefault();
+        if (!form.reportValidity()) return;
+
+        const quantity = Number(heartQuantity.value);
+        const document = cpf.value.replace(/\D/g, "");
+        const phoneDigits = phone.value.replace(/\D/g, "");
+        if (!Number.isSafeInteger(quantity) || quantity < 5 || quantity > 178) {
+          status.textContent = "Informe uma quantidade inteira entre 5 e 178 corações.";
+          return;
+        }
+        if (name.value.trim().length < 3 || !window.contributionValidation.validCpf(document) ||
+            !/^\d{10,11}$/.test(phoneDigits) ||
+            !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.value.trim())) {
+          status.textContent = "Confira nome, CPF válido, telefone com DDD e e-mail.";
+          return;
+        }
+
+        const tracking = {};
+        const params = new URLSearchParams(location.search);
+        for (const key of trackingKeys) {
+          if (params.has(key)) tracking[key] = params.get(key);
+        }
+        const data = {
+          purchaseType: "hearts",
+          heartQuantity: quantity,
+          customer: {
+            name: name.value.trim(),
+            email: email.value.trim(),
+            document,
+            phone: phoneDigits,
+          },
+          tracking,
+        };
+        const controls = [...form.querySelectorAll("input"), ...offers];
+        controls.forEach((control) => { control.disabled = true; });
+        submit.disabled = true;
+        result.hidden = true;
+        status.textContent = "Gerando Pix. Aguarde...";
+
+        try {
+          const response = await fetch("/api/pix", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(data),
+          });
+          const body = await response.json();
+          if (!response.ok) {
+            status.textContent = body.error || "Não foi possível gerar o Pix. Verifique no painel antes de tentar novamente.";
+            return;
+          }
+          if (typeof body.code !== "string" || !body.code || body.amount !== quantity * 190) {
+            status.textContent = "Resposta Pix inválida. Verifique no painel antes de tentar novamente.";
+            return;
+          }
+          code.value = body.code;
+          resultAmount.textContent = `Valor do Pix: ${moneyFormat.format(body.amount / 100)}`;
+          qr.hidden = !body.qrImage;
+          if (body.qrImage) qr.src = body.qrImage;
+          else qr.removeAttribute("src");
+          copyStatus.textContent = "";
+          result.hidden = false;
+          status.textContent = "Pix gerado. O pagamento ainda precisa ser realizado.";
+          submit.textContent = "Gerar outro Pix";
+        } catch {
+          status.textContent = "Não foi possível confirmar a geração do Pix. Verifique no painel antes de tentar novamente.";
+        } finally {
+          controls.forEach((control) => { control.disabled = false; });
+          submit.disabled = false;
+        }
+      });
+
+      copy.addEventListener("click", async () => {
+        try {
+          await navigator.clipboard.writeText(code.value);
+          copyStatus.textContent = "Código copiado!";
+        } catch {
+          code.focus();
+          code.select();
+          copyStatus.textContent = "Selecione e copie o código acima.";
+        }
+      });
+
+      if (window.contributionValidation) {
+        submit.disabled = false;
+      } else {
+        status.textContent = "Não foi possível carregar a validação do pagamento. Recarregue a página.";
+      }
+    </script>
+  </body>
+</html>

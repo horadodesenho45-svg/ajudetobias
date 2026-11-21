@@ -707,26 +707,6 @@
                         children:
                           "N\xe3o foi poss\xedvel carregar os pacotes agora.",
                       }),
-                      (0, a.jsx)(p(), {
-                        href: {
-                          pathname: "/loja/[slug]",
-                          query: {
-                            slug: "adesivo-digital",
-                            utm_internal_source: "sticker-modal",
-                          },
-                        },
-                        passHref: !0,
-                        onClick: K,
-                        children: (0, a.jsx)(x.o5, {
-                          fontFamily: w.f,
-                          fontSize: 14,
-                          align: "center",
-                          weight: 700,
-                          color: "gray400",
-                          textDecoration: "underline",
-                          children: "Ver pacotes de cora\xe7\xf5es",
-                        }),
-                      }),
                     ],
                   }),
                 "noStickers" === I &&

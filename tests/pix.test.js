@@ -59,7 +59,7 @@ test("integração Horizon usa centavos, nome do ebook, Turbine e UTMs", async (
     const body = JSON.parse(options.body);
     sent.push({ url, options, body });
     return { ok: true, json: async () => ({
-      status: "PENDING", pix: { code: "pix-exemplo", qrCodeDataUrl: "data:image/png;base64,AAAA" }, amountCents: body.amountCents,
+      id: "transacao-exemplo", status: "PENDING", pix: { code: "pix-exemplo", qrCodeDataUrl: "data:image/png;base64,AAAA" }, amountCents: body.amountCents,
     }) };
   };
   try {
@@ -70,6 +70,7 @@ test("integração Horizon usa centavos, nome do ebook, Turbine e UTMs", async (
     assert.deepEqual([plain.body.amount, extra.body.amount, over100.body.amount, boundary.body.amount], [1000, 1590, 10000, 35000]);
     assert.equal(plain.statusCode, 200);
     assert.equal(plain.body.code, "pix-exemplo");
+    assert.equal(typeof plain.body.statusToken, "string");
     assert.equal(sent[0].url, "https://app.horizonpags.com/api/v1/transactions");
     assert.equal(sent[0].options.headers["x-api-key"], "test-key");
     assert.match(sent[0].options.headers["Idempotency-Key"], /^[0-9a-f-]{36}$/);
@@ -99,7 +100,7 @@ test("tracking ausente é aceito e campos não documentados não são enviados",
   global.fetch = async (url, options) => {
     const body = JSON.parse(options.body);
     sent.push(body);
-    return { ok: true, json: async () => ({ status: "PENDING", pix: { code: "pix" }, amountCents: body.amountCents }) };
+    return { ok: true, json: async () => ({ id: "transacao-exemplo", status: "PENDING", pix: { code: "pix" }, amountCents: body.amountCents }) };
   };
   try {
     const withoutTracking = { ...valid };
@@ -133,13 +134,47 @@ test("calcula Turbine no servidor e ignora valor total fornecido pelo cliente", 
   let sent;
   global.fetch = async (url, options) => {
     sent = JSON.parse(options.body);
-    return { ok: true, json: async () => ({ status: "PENDING", pix: { code: "pix" }, amountCents: sent.amountCents }) };
+    return { ok: true, json: async () => ({ id: "transacao-exemplo", status: "PENDING", pix: { code: "pix" }, amountCents: sent.amountCents }) };
   };
   try {
     const response = await request({ ...valid, contribution: 1000, bundleChecked: true, amount: 1 });
     assert.equal(response.statusCode, 200);
     assert.equal(sent.amountCents, 1590);
     assert.match(sent.description, /Turbine/);
+  } finally {
+    global.fetch = originalFetch;
+    delete process.env.HORIZON_API_KEY;
+  }
+});
+
+test("calcula corações no servidor e identifica a quantidade na descrição Horizon", async () => {
+  process.env.HORIZON_API_KEY = "test-key";
+  const originalFetch = global.fetch;
+  const sent = [];
+  global.fetch = async (url, options) => {
+    const body = JSON.parse(options.body);
+    sent.push(body);
+    return { ok: true, json: async () => ({ status: "PENDING", pix: { code: "pix" }, amountCents: body.amountCents }) };
+  };
+  try {
+    for (const [quantity, amount] of [[5, 950], [10, 1900], [178, 33820]]) {
+      const response = await request({
+        ...valid, purchaseType: "hearts", heartQuantity: quantity,
+        contribution: 1, bundleChecked: true, amount: 1,
+      });
+      assert.equal(response.statusCode, 200);
+      assert.equal(response.body.amount, amount);
+      assert.equal(sent.at(-1).amountCents, amount);
+      assert.match(sent.at(-1).description, new RegExp(`^Corações - caso Tobias \\(${quantity} `));
+      assert.equal(sent.at(-1).productId, undefined);
+    }
+    assert.match(sent[0].description, /5 corações\)$/);
+    assert.match(sent[1].description, /10 corações\)$/);
+    for (const quantity of [0, 1, 4, 179, 5.5, "5", null, undefined]) {
+      assert.equal((await request({ ...valid, purchaseType: "hearts", heartQuantity: quantity })).statusCode, 400);
+    }
+    assert.equal((await request({ ...valid, purchaseType: "unknown" })).statusCode, 400);
+    assert.equal(sent.length, 3);
   } finally {
     global.fetch = originalFetch;
     delete process.env.HORIZON_API_KEY;

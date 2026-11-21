@@ -1,6 +1,7 @@
 const { randomUUID } = require("node:crypto");
 const { validCpf } = require("../js/validacao-contribuicao");
 const { calculateBundleTotal, maxAmount } = require("../js/adicionais-contribuicao");
+const { createToken } = require("../lib/pix-status-token");
 
 const trackingKeys = {
   utm_source: "source", utm_medium: "medium", utm_campaign: "campaign",
@@ -36,21 +37,37 @@ module.exports = async function handler(req, res) {
     return respond(res, 400, "Dados da contribuição inválidos.");
   }
 
-  const { customer, contribution, bundleChecked, tracking } = body;
+  const { customer, contribution, bundleChecked, tracking, heartQuantity, purchaseType } = body;
   if (!customer || typeof customer !== "object" || Array.isArray(customer) ||
       typeof customer.name !== "string" || customer.name.trim().length < 3 || customer.name.trim().length > 150 ||
       typeof customer.email !== "string" || customer.email.length > 254 || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(customer.email) ||
       typeof customer.document !== "string" || !validCpf(customer.document) ||
-      typeof customer.phone !== "string" || !/^\d{10,11}$/.test(customer.phone) ||
-      !Number.isSafeInteger(contribution) || contribution <= 0) {
-    return respond(res, 400, "Confira nome, CPF, telefone, e-mail e valor da contribuição.");
+      typeof customer.phone !== "string" || !/^\d{10,11}$/.test(customer.phone)) {
+    return respond(res, 400, "Confira nome, CPF, telefone e e-mail.");
   }
-  const amount = calculateBundleTotal(contribution, bundleChecked);
-  if (amount !== null && amount < 100) {
-    return respond(res, 400, "O valor total do Pix deve ser de pelo menos R$ 1,00.");
-  }
-  if (amount === null || amount > maxAmount) {
-    return respond(res, 400, "Confira a opção Turbine: o total do Pix deve ser de até R$ 350,00.");
+
+  let amount;
+  let description;
+  if (purchaseType === "hearts") {
+    if (!Number.isSafeInteger(heartQuantity) || heartQuantity < 5 || heartQuantity > 178) {
+      return respond(res, 400, "Informe uma quantidade inteira entre 5 e 178 corações.");
+    }
+    amount = heartQuantity * 190;
+    description = `Corações - caso Tobias (${heartQuantity} corações)`;
+  } else if (purchaseType === undefined) {
+    if (!Number.isSafeInteger(contribution) || contribution <= 0) {
+      return respond(res, 400, "Confira o valor da contribuição.");
+    }
+    amount = calculateBundleTotal(contribution, bundleChecked);
+    if (amount !== null && amount < 100) {
+      return respond(res, 400, "O valor total do Pix deve ser de pelo menos R$ 1,00.");
+    }
+    if (amount === null || amount > maxAmount) {
+      return respond(res, 400, "Confira a opção Turbine: o total do Pix deve ser de até R$ 350,00.");
+    }
+    description = bundleChecked ? "Ebook Menino Tobias - Turbine" : "Ebook Menino Tobias";
+  } else {
+    return respond(res, 400, "Tipo de compra inválido.");
   }
 
   if (tracking !== undefined && (!tracking || typeof tracking !== "object" || Array.isArray(tracking))) {
@@ -71,9 +88,7 @@ module.exports = async function handler(req, res) {
 
   const payload = {
     amountCents: amount,
-    description: bundleChecked
-      ? "Ebook Menino Tobias - Turbine"
-      : "Ebook Menino Tobias",
+    description,
     externalRef: randomUUID(),
     customer: {
       name: customer.name.trim(),
@@ -110,5 +125,12 @@ module.exports = async function handler(req, res) {
   const qrImage = typeof result.pix.qrCodeDataUrl === "string" &&
     /^data:image\/png;base64,[A-Za-z0-9+/=]+$/.test(result.pix.qrCodeDataUrl) &&
     result.pix.qrCodeDataUrl.length <= 1000000 ? result.pix.qrCodeDataUrl : null;
-  return res.status(200).json({ code: result.pix.code, qrImage, amount });
+  if (purchaseType === "hearts") {
+    return res.status(200).json({ code: result.pix.code, qrImage, amount });
+  }
+  const statusToken = createToken(result.id, amount, apiKey);
+  if (!statusToken) {
+    return respond(res, 502, "A Horizon não informou um identificador válido para acompanhar o Pix. Verifique no painel antes de tentar novamente.");
+  }
+  return res.status(200).json({ code: result.pix.code, qrImage, amount, statusToken });
 };
