@@ -245,14 +245,14 @@
       }
 
       const label = action.textContent.trim();
-      if (label !== "Quero Ajudar" && label !== "Compartilhar") {
+      if (label !== "Quero Ajudar" && label !== "Contribuir" && label !== "Compartilhar") {
         return;
       }
 
       event.preventDefault();
       event.stopImmediatePropagation();
 
-      if (label === "Quero Ajudar") {
+      if (label === "Quero Ajudar" || label === "Contribuir") {
         const destination = new URL("queroajudar.html", window.location.href);
         const current = new URL(window.location.href);
         ["utm_source", "utm_medium", "utm_campaign", "utm_content", "utm_term", "src", "sck", "fbclid", "gclid"]
