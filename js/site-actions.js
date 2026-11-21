@@ -46,6 +46,14 @@
   function initializeStaticCampaignContent() {
     const content = document.querySelector(".sc-77c3c68b-0");
     if (content) {
+      if (!document.getElementById("static-about-content")) {
+        const template = document.createElement("template");
+        template.id = "static-about-content";
+        template.content.append(...Array.from(content.childNodes, function (node) {
+          return node.cloneNode(true);
+        }));
+        document.body.append(template);
+      }
       content.id = "campaign-tab-content";
       campaignTabContent = content;
     }
@@ -59,6 +67,7 @@
           Atualizações: "updates",
           "Quem ajudou": "supporters",
           "Vakinha Premiada": "prizes",
+          "Como funciona sua contribuição": "prizes",
           "Selos recebidos": "badges",
           "Perguntas e Respostas": "faq",
         }[label];
@@ -87,7 +96,7 @@
             loading="lazy"
           ></iframe>
         </div>
-        <p class="campaign-video__sound-notice">Para ouvir o vídeo, ative o som no player.</p>
+        <p class="campaign-video__sound-notice">Para ouvir o vídeo, ative o som no player. <a href="https://vimeo.com/1246487417" target="_blank" rel="noopener noreferrer">Abrir no Vimeo</a></p>
       `;
       campaignSummary.after(videoSection);
     }
