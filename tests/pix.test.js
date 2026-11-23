@@ -1,7 +1,11 @@
 const test = require("node:test");
 const assert = require("node:assert/strict");
+const fs = require("node:fs");
+const path = require("node:path");
+const vm = require("node:vm");
 const handler = require("../api/pix");
 const { calculateBundleTotal } = require("../js/adicionais-contribuicao");
+const { fromSearch, destination } = require("../js/tracking-campanha");
 
 const valid = {
   customer: {
@@ -113,6 +117,97 @@ test("tracking ausente é aceito e campos não documentados não são enviados",
     global.fetch = originalFetch;
     delete process.env.HORIZON_API_KEY;
   }
+});
+
+test("preserva os parâmetros da campanha até os Pix de contribuição e corações", async () => {
+  const campaign = "https://example.com/index.html?utm_source=facebook&utm_medium=cpc&utm_campaign=promo%7C123&utm_content=anuncio&utm_term=reels&src=origem&sck=identificador&fbclid=clique&outro=privado";
+  const checkout = destination("queroajudar.html", campaign);
+  const thankYou = destination("obrigado.html", checkout);
+  const returnToCampaign = destination("index.html", thankYou);
+  const tracking = fromSearch(new URL(checkout).search);
+  assert.deepEqual(fromSearch(new URL(thankYou).search), tracking);
+  assert.deepEqual(fromSearch(new URL(returnToCampaign).search), tracking);
+  assert.equal(new URL(checkout).searchParams.has("outro"), false);
+  assert.deepEqual(fromSearch("?utm_source=&utm_medium=cpc"), { utm_medium: "cpc" });
+  assert.equal(destination("obrigado.html", "https://example.com/queroajudar.html"), "https://example.com/obrigado.html");
+
+  process.env.HORIZON_API_KEY = "test-key";
+  const originalFetch = global.fetch;
+  const sent = [];
+  global.fetch = async (url, options) => {
+    const body = JSON.parse(options.body);
+    sent.push(body);
+    return { ok: true, json: async () => ({ id: "transacao-exemplo", status: "PENDING", pix: { code: "pix" }, amountCents: body.amountCents }) };
+  };
+  try {
+    assert.equal((await request({ ...valid, tracking })).statusCode, 200);
+    assert.equal((await request({ ...valid, purchaseType: "hearts", heartQuantity: 5, tracking: fromSearch(new URL(thankYou).search) })).statusCode, 200);
+    const expected = {
+      source: "facebook", medium: "cpc", campaign: "promo|123",
+      content: "anuncio", term: "reels", src: "origem", sck: "identificador",
+    };
+    assert.deepEqual(sent[0].utm, expected);
+    assert.deepEqual(sent[1].utm, expected);
+  } finally {
+    global.fetch = originalFetch;
+    delete process.env.HORIZON_API_KEY;
+  }
+});
+
+test("formulário envia UTMs e preserva os parâmetros ao confirmar o Pix", async () => {
+  const elements = {};
+  const listeners = {};
+  for (const id of [
+    "contribution-form", "pix-submit", "pix-validation", "pix-status", "pix-result",
+    "pix-result-amount", "pix-instructions", "pix-code", "pix-qr", "pix-copy",
+    "pix-copy-status", "payerDocument", "payerPhone", "name", "email", "amount", "bundleCheck",
+  ]) {
+    elements[id] = {
+      value: "", validity: { valid: true }, hidden: true, checked: false,
+      addEventListener(type, callback) { listeners[`${id}:${type}`] = callback; },
+      querySelectorAll() { return []; }, reportValidity() { return true; },
+      removeAttribute() {},
+    };
+  }
+  elements.name.value = "Pessoa Exemplo";
+  elements.email.value = "exemplo@example.com";
+  elements.payerDocument.value = "52998224725";
+  elements.payerPhone.value = "11999999999";
+  elements.amount.value = "10";
+
+  const href = "https://example.com/queroajudar.html?utm_source=facebook&utm_campaign=teste&src=anuncio";
+  let submitted;
+  let redirected;
+  let timer;
+  const context = {
+    document: { getElementById: (id) => elements[id] },
+    location: new URL(href),
+    window: {
+      location: { href, assign: (url) => { redirected = url; } },
+      contributionAdditions: { calculateBundleTotal },
+      contributionValidation: { validCpf: () => true },
+      campaignTracking: { fromSearch, destination },
+      pixCustomerSession: { save() {} },
+    },
+    sessionStorage: { getItem() { return null; }, setItem() {}, removeItem() {} },
+    fetch: async (url, options) => {
+      if (url === "/api/pix") {
+        submitted = JSON.parse(options.body);
+        return { ok: true, json: async () => ({ code: "pix", qrImage: null, amount: 1000, statusToken: "token" }) };
+      }
+      return { ok: true, json: async () => ({ status: "paid" }) };
+    },
+    setTimeout: (callback) => { timer = callback; return 1; },
+    clearTimeout() {},
+    URLSearchParams, Intl,
+  };
+  vm.runInNewContext(fs.readFileSync(path.join(__dirname, "../js/pix-contribuicao.js"), "utf8"), context);
+  await listeners["contribution-form:submit"]({ preventDefault() {} });
+  assert.deepEqual(JSON.parse(JSON.stringify(submitted.tracking)), {
+    utm_source: "facebook", utm_campaign: "teste", src: "anuncio",
+  });
+  await timer();
+  assert.equal(redirected, "https://example.com/obrigado.html?utm_source=facebook&utm_campaign=teste&src=anuncio");
 });
 
 test("rejeita dados inválidos, origem externa e configuração ausente", async () => {

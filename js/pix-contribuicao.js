@@ -17,7 +17,6 @@
   const amount = document.getElementById("amount");
   const bundle = document.getElementById("bundleCheck");
   const additionsConfig = window.contributionAdditions;
-  const keys = ["utm_source", "utm_medium", "utm_campaign", "utm_content", "utm_term", "src", "sck", "fbclid", "gclid"];
 
   if (!form || !submit || !validation || !status || !result || !resultAmount ||
       !instructions || !code || !qr || !copy || !copyStatus || !cpf || !phone ||
@@ -84,7 +83,7 @@
         } else if (body.status === "paid") {
           stopMonitoring();
           status.textContent = "Pagamento confirmado. Redirecionando...";
-          window.location.assign("obrigado.html");
+          window.location.assign(window.campaignTracking.destination("obrigado.html", window.location.href));
           return;
         } else if (body.status === "closed") {
           const removed = stopMonitoring();
@@ -177,11 +176,7 @@
     const match = /^(\d+)(?:[,.](\d{1,2}))?$/.exec(amount.value.trim());
     if (!match) return;
     const contribution = Number(match[1]) * 100 + Number((match[2] || "").padEnd(2, "0"));
-    const tracking = {};
-    const params = new URLSearchParams(location.search);
-    for (const key of keys) {
-      if (params.has(key)) tracking[key] = params.get(key);
-    }
+    const tracking = window.campaignTracking.fromSearch(location.search);
     const data = {
       customer: {
         name: name.value.trim(),
