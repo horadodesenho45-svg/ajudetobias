@@ -12,29 +12,16 @@
 
 .prize-campaign__image {
   display: block;
-  max-width: 560px;
-  margin: 0 auto;
-  border-radius: 10px;
-}
-
-.prize-campaign__image img {
-  display: block;
   width: 100%;
+  max-width: 560px;
   height: auto;
+  margin: 0 auto 16px;
   border-radius: 10px;
 }
 
-.prize-campaign__image:focus-visible,
 .prize-campaign__link:focus-visible {
   outline: 3px solid #742400;
   outline-offset: 3px;
-}
-
-.prize-campaign p.prize-campaign__image-hint {
-  margin: 6px 0 16px;
-  color: #70615a;
-  font-size: 12px;
-  text-align: center;
 }
 
 .prize-campaign__schedule {
