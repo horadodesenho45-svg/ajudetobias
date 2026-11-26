@@ -104,7 +104,7 @@
     }
 
     const video = document.querySelector(".campaign-video");
-    if (video && prizeCampaign && !prizeCampaign.isConnected) {
+    if (video && prizeCampaign && video.nextElementSibling !== prizeCampaign) {
       video.after(prizeCampaign);
     }
   }
