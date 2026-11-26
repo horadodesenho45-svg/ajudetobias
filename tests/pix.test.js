@@ -36,6 +36,55 @@ test("Turbine adiciona R$ 5,90 apenas abaixo de R$ 100", () => {
   assert.equal(calculateBundleTotal(10000, "true"), null);
 });
 
+test("cotas acompanham o total e desconsideram frações de R$ 0,46", () => {
+  const listeners = {};
+  function element(id) {
+    return {
+      value: "", checked: false, textContent: "", hidden: false,
+      addEventListener(event, callback) { listeners[`${id}:${event}`] = callback; },
+      setAttribute() {},
+      setCustomValidity() {},
+    };
+  }
+  const ids = [
+    "amount", "amount-error", "bundleCheck", "bundle-price", "bundle-total",
+    "contribution-total", "payment-total", "prize-quotas",
+  ];
+  const elements = Object.fromEntries(ids.map((id) => [id, element(id)]));
+  elements.amount.form = element("form");
+  vm.runInNewContext(
+    fs.readFileSync(path.join(__dirname, "../js/valores-contribuicao.js"), "utf8"),
+    {
+      document: {
+        getElementById(id) { return elements[id]; },
+        querySelectorAll() { return []; },
+      },
+      window: { contributionAdditions: { calculateBundleTotal } },
+      Intl,
+    },
+  );
+
+  assert.match(elements["prize-quotas"].textContent, /valor válido/);
+  elements.amount.value = "7,90";
+  listeners["amount:input"]();
+  assert.equal(elements["prize-quotas"].textContent, "Cotas após pagamento confirmado: 17");
+  elements.amount.value = "10,00";
+  listeners["amount:input"]();
+  assert.equal(elements["prize-quotas"].textContent, "Cotas após pagamento confirmado: 21");
+  elements.bundleCheck.checked = true;
+  listeners["bundleCheck:change"]();
+  assert.equal(elements["prize-quotas"].textContent, "Cotas após pagamento confirmado: 34");
+  elements.amount.value = "100,00";
+  listeners["amount:input"]();
+  assert.equal(elements["prize-quotas"].textContent, "Cotas após pagamento confirmado: 217");
+  elements.amount.value = "350,00";
+  listeners["amount:input"]();
+  assert.equal(elements["prize-quotas"].textContent, "Cotas após pagamento confirmado: 760");
+  elements.amount.value = "351,00";
+  listeners["amount:input"]();
+  assert.match(elements["prize-quotas"].textContent, /valor válido/);
+});
+
 async function request(body, options = {}) {
   const res = {
     headers: {},

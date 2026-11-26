@@ -1,5 +1,7 @@
 (function () {
   let campaignTabContent;
+  const prizeTemplate = document.getElementById("prize-campaign-template");
+  const prizeCampaign = prizeTemplate && prizeTemplate.content.firstElementChild;
   const relativeTime = new Intl.RelativeTimeFormat("pt-BR", {
     numeric: "always",
   });
@@ -99,6 +101,11 @@
         <p class="campaign-video__sound-notice">Para ouvir o vídeo, ative o som no player. <a href="https://vimeo.com/1246487417" target="_blank" rel="noopener noreferrer">Abrir no Vimeo</a></p>
       `;
       campaignSummary.after(videoSection);
+    }
+
+    const video = document.querySelector(".campaign-video");
+    if (video && prizeCampaign && !prizeCampaign.isConnected) {
+      video.after(prizeCampaign);
     }
   }
 

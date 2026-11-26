@@ -7,6 +7,7 @@
   const bundleTotal = document.getElementById("bundle-total");
   const contributionTotal = document.getElementById("contribution-total");
   const paymentTotal = document.getElementById("payment-total");
+  const prizeQuotas = document.getElementById("prize-quotas");
   const additionsConfig = window.contributionAdditions;
   const form = amount && amount.form;
 
@@ -19,6 +20,7 @@
     !bundleTotal ||
     !contributionTotal ||
     !paymentTotal ||
+    !prizeQuotas ||
     !additionsConfig
   ) {
     console.error("Não foi possível inicializar os valores de contribuição.");
@@ -77,6 +79,12 @@
         ? currency.format(totalCents / 100)
         : formattedValue
     }`;
+    if (valid) {
+      const quotas = Math.floor(totalCents / 46);
+      prizeQuotas.textContent = `Cotas após pagamento confirmado: ${quotas}`;
+    } else {
+      prizeQuotas.textContent = "Informe um valor válido para calcular suas cotas.";
+    }
     buttons.forEach((button) => {
       button.setAttribute(
         "aria-pressed",

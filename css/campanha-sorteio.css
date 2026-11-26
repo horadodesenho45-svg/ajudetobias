@@ -1,0 +1,132 @@
+.prize-campaign {
+  box-sizing: border-box;
+  margin: 20px 0;
+  padding: 20px;
+  border: 1px solid #f2d5c3;
+  border-radius: 16px;
+  background: #fffaf6;
+  box-shadow: 0 4px 16px rgb(112 52 13 / 8%);
+  color: #30241e;
+  line-height: 1.5;
+}
+
+.prize-campaign__image {
+  display: block;
+  max-width: 560px;
+  margin: 0 auto;
+  border-radius: 10px;
+}
+
+.prize-campaign__image img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: 10px;
+}
+
+.prize-campaign__image:focus-visible,
+.prize-campaign__link:focus-visible {
+  outline: 3px solid #742400;
+  outline-offset: 3px;
+}
+
+.prize-campaign p.prize-campaign__image-hint {
+  margin: 6px 0 16px;
+  color: #70615a;
+  font-size: 12px;
+  text-align: center;
+}
+
+.prize-campaign__schedule {
+  margin-bottom: 16px;
+}
+
+.prize-campaign h2 {
+  margin: 0 0 6px;
+  color: #a83700;
+  font-size: 20px;
+  line-height: 1.3;
+}
+
+.prize-campaign h3 {
+  margin: 0 0 8px;
+  font-size: 17px;
+  line-height: 1.3;
+}
+
+.prize-campaign p {
+  margin: 8px 0;
+  font-size: 14px;
+}
+
+.prize-campaign p.prize-campaign__countdown {
+  margin: 12px 0 0;
+  padding: 10px 12px;
+  border-radius: 8px;
+  background: #fff0e4;
+  color: #62554f;
+  font-weight: 700;
+}
+
+.prize-campaign__countdown strong {
+  display: block;
+  color: #a83700;
+  font-size: 18px;
+  font-variant-numeric: tabular-nums;
+}
+
+.prize-campaign__link {
+  display: block;
+  box-sizing: border-box;
+  margin-top: 12px;
+  padding: 14px 20px;
+  border-radius: 8px;
+  background: #f45102;
+  color: #fff;
+  font-size: 16px;
+  font-weight: 700;
+  text-align: center;
+  text-decoration: none;
+}
+
+.prize-campaign__link:hover {
+  background: #c43d00;
+}
+
+.prize-campaign__winners {
+  margin-top: 20px;
+  padding-top: 16px;
+  border-top: 1px solid #f2d5c3;
+}
+
+.prize-campaign__winners ol {
+  display: grid;
+  gap: 8px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  font-size: 14px;
+}
+
+.prize-campaign__winners li {
+  padding: 9px 12px;
+  border-radius: 8px;
+  background: #fff;
+  border: 1px solid #f4e3d8;
+}
+
+.prize-campaign p.prize-campaign__notice {
+  color: #62554f;
+  font-size: 13px;
+}
+
+#prize-quotas {
+  color: #a83700;
+  font-weight: 700;
+}
+
+@media (max-width: 480px) {
+  .prize-campaign {
+    padding: 16px;
+  }
+}
